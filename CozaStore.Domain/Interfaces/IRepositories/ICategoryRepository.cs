@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CozaStore.MVC.Domain.Interfaces.IRepositories.Categories
+namespace CozaStore.Domain.Interfaces.IRepositories
 {
     public interface ICategoryRepository
     {
         Task<List<Category>> GetAllAsync();
         Task<Category?> GetByIdAsync(int id);
         Task AddAsync(Category category);
-        Task UpdateAsync(Category category);
-        Task DeleteAsync(Category category);
+        void Update(Category category);
+        void Delete(Category category);
+        Task SaveAsync();
     }
 }

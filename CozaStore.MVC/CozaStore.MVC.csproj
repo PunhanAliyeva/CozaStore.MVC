@@ -10,4 +10,8 @@
     <Folder Include="Models\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CozaStore.Persistence\CozaStore.Persistence.csproj" />
+  </ItemGroup>
+
 </Project>

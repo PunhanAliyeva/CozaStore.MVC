@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CozaStore.MVC.Domain.Interfaces.IServices.Categories
+namespace CozaStore.Domain.Interfaces.IServices
 {
     public interface ICategoryService
     {
@@ -13,6 +13,6 @@ namespace CozaStore.MVC.Domain.Interfaces.IServices.Categories
         Task<Category?> GetByIdAsync(int id);
         Task AddAsync(Category category);
         Task UpdateAsync(Category category);
-        Task DeleteAsync(int id);
+        Task DeleteAsync(Category category);
     }
 }

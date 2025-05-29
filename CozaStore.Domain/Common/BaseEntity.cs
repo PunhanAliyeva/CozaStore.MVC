@@ -18,7 +18,5 @@ namespace CozaStore.MVC.Domain.Commons
 
         public DateTime? DeletedAt { get; set; }
         public int? DeletedById { get; set; }
-
-        public bool IsDeleted { get; set; } = false;
     }
 }

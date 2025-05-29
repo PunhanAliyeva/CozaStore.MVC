@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CozaStore.MVC.Persistence.Repositories.Sliders
+namespace CozaStore.Domain.Interfaces.IRepositories
 {
-    public class SliderRepository
+    public class IRepository
     {
     }
 }

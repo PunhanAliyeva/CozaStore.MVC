@@ -1,9 +1,9 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IRepositories.Categories;
+﻿using CozaStore.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Models.Entities;
 using CozaStore.MVC.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace CozaStore.MVC.Persistence.Repositories.Categories
+namespace CozaStore.Persistence.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
@@ -13,36 +13,33 @@ namespace CozaStore.MVC.Persistence.Repositories.Categories
         {
             _context = context;
         }
-
         public async Task<List<Category>> GetAllAsync()
         {
-            return await _context.Categories
-                .Where(c => c.DeletedAt == null)
-                .ToListAsync();
+            return await _context.Categories.Where(c => c.DeletedAt == null).ToListAsync();
         }
-
         public async Task<Category?> GetByIdAsync(int id)
         {
-            return await _context.Categories
-                .FirstOrDefaultAsync(c => c.Id == id && c.DeletedAt == null);
+            return await _context.Categories.FirstOrDefaultAsync(c => c.Id == id && c.DeletedAt == null);
         }
 
         public async Task AddAsync(Category category)
         {
             await _context.Categories.AddAsync(category);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateAsync(Category category)
+        public void Update(Category category)
         {
             _context.Categories.Update(category);
-            await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteAsync(Category category)
+        public void Delete(Category category)
         {
             category.DeletedAt = DateTime.UtcNow;
             _context.Categories.Update(category);
+        }
+
+        public async Task SaveAsync()
+        {
             await _context.SaveChangesAsync();
         }
     }
