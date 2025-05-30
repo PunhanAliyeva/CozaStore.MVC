@@ -1,5 +1,5 @@
 ﻿using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Models.Entities;
+using CozaStore.MVC.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CozaStore.MVC.Areas.AdminArea.Controllers

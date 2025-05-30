@@ -2,8 +2,8 @@
 
 namespace CozaStore.MVC.Domain.Interfaces.IRepositories
 {
-    public interface ISliderRepository:IRepository<Slider>
-    {
-      
-    }
+	public interface IAboutRepository:IRepository<About>
+	{
+		Task<About?> GetFirstAsync();
+	}
 }

@@ -2,8 +2,8 @@
 
 namespace CozaStore.MVC.Domain.Interfaces.IServices
 {
-	public interface IProductService : IService<Product>
+	public interface IAboutService:IService<About>
 	{
-
+		Task<About?> GetFirstAsync();
 	}
 }

@@ -1,4 +1,4 @@
-﻿using CozaStore.MVC.Models.Entities;
+﻿using CozaStore.MVC.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CozaStore.MVC.Persistence.Data
@@ -11,5 +11,8 @@ namespace CozaStore.MVC.Persistence.Data
         }
         public DbSet<Slider> Sliders { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<About> Abouts { get; set; }
+        public DbSet<AboutContent> AboutContents { get; set; }
     }
 }

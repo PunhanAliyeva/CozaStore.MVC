@@ -1,4 +1,4 @@
-﻿using CozaStore.MVC.Models.Entities;
+﻿using CozaStore.MVC.Entities;
 
 namespace CozaStore.MVC.Domain.Interfaces.IRepositories
 {

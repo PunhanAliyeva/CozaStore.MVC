@@ -1,7 +1,7 @@
 ﻿using CozaStore.MVC.Domain.Commons;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CozaStore.MVC.Models.Entities
+namespace CozaStore.MVC.Entities
 {
     public class Product:BaseEntity
 	{
