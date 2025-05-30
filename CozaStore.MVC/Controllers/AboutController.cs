@@ -17,11 +17,10 @@ namespace CozaStore.MVC.Controllers
 		}
 		public async Task<IActionResult> Index()
 		{
-			AboutVM aboutVM = new()
-			{
-				About = await _aboutService.GetFirstAsync(),
-				AboutContent = await _aboutContentService.GetFirstAsync()
-			};
+			var about = await _aboutService.GetFirstAsync();
+			var aboutContent= await _aboutContentService.GetFirstAsync();
+			if (about == null || aboutContent == null) return NotFound();
+			AboutVM aboutVM = new() { About = about, AboutContent = aboutContent };
 			return View(aboutVM);
 		}
 	}
