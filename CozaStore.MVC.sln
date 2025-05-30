@@ -9,8 +9,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{48D56232-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{A02594B1-38EB-4CFD-97FC-D29FAEB7DE81}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozaStore.AdminPanel", "CozaStore.AdminPanel\CozaStore.AdminPanel.csproj", "{5A758A29-EC32-44D1-9CBD-9053EF53F9F7}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozaStore.Application", "CozaStore.Application\CozaStore.Application.csproj", "{13C903DC-9CB5-411F-B193-A20E45243753}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CozaStore.Domain", "CozaStore.Domain\CozaStore.Domain.csproj", "{87D32632-ACC7-42E0-AE7B-D79E02CDB29D}"
@@ -29,10 +27,6 @@ Global
 		{BF396901-F566-4151-A995-019F7CED6A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF396901-F566-4151-A995-019F7CED6A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF396901-F566-4151-A995-019F7CED6A74}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A758A29-EC32-44D1-9CBD-9053EF53F9F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5A758A29-EC32-44D1-9CBD-9053EF53F9F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5A758A29-EC32-44D1-9CBD-9053EF53F9F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5A758A29-EC32-44D1-9CBD-9053EF53F9F7}.Release|Any CPU.Build.0 = Release|Any CPU
 		{13C903DC-9CB5-411F-B193-A20E45243753}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{13C903DC-9CB5-411F-B193-A20E45243753}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{13C903DC-9CB5-411F-B193-A20E45243753}.Release|Any CPU.ActiveCfg = Release|Any CPU

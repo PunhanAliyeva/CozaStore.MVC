@@ -1,9 +1,8 @@
-﻿using CozaStore.Domain.Interfaces.IServices;
-using CozaStore.MVC.Domain.Interfaces.IServices;
+﻿using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CozaStore.AdminPanel.Controllers
+namespace CozaStore.MVC.AdminPanel.Controllers
 {
     public class SliderController : Controller
     {

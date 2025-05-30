@@ -2,13 +2,8 @@
 
 namespace CozaStore.MVC.Domain.Interfaces.IRepositories
 {
-    public interface ISliderRepository
+    public interface ISliderRepository:IRepository<Slider>
     {
-        Task<List<Slider>> GetAllAsync();
-        Task<Slider?> GetByIdAsync(int id);
-        Task AddAsync(Slider slider);
-        void Update(Slider slider);
-        void Delete(Slider slider);
-        Task SaveAsync();
+      
     }
 }

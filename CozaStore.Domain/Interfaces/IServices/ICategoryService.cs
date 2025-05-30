@@ -1,18 +1,10 @@
-﻿using CozaStore.MVC.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CozaStore.MVC.Domain.Interfaces.IServices;
+using CozaStore.MVC.Models.Entities;
 
-namespace CozaStore.Domain.Interfaces.IServices
+namespace CozaStore.MVC.Domain.Interfaces.IServices
 {
-    public interface ICategoryService
+    public interface ICategoryService:IService<Category>
     {
-        Task<List<Category>> GetAllAsync();
-        Task<Category?> GetByIdAsync(int id);
-        Task AddAsync(Category category);
-        Task UpdateAsync(Category category);
-        Task DeleteAsync(Category category);
+
     }
 }

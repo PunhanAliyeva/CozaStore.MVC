@@ -1,12 +1,11 @@
-﻿using CozaStore.Domain.Interfaces.IRepositories;
-using CozaStore.Domain.Interfaces.IServices;
+﻿using CozaStore.MVC.Domain.Interfaces.IRepositories;
+using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Persistence.Data;
-using CozaStore.Persistence.Repositories;
-using CozaStore.Persistence.Services;
+using CozaStore.MVC.Persistence.Repositories;
+using CozaStore.MVC.Persistence.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Protocols;
 
 namespace CozaStore.MVC.Persistence
 {
@@ -18,8 +17,14 @@ namespace CozaStore.MVC.Persistence
             {
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
             });
-            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
+            services.AddScoped(typeof(IService<>), typeof(Service<>));
             services.AddScoped<ICategoryRepository, CategoryRepository>();
-        }
+			services.AddScoped<ICategoryService, CategoryService>();
+			services.AddScoped<ISliderRepository, SliderRepository>();
+			services.AddScoped<ISliderService, SliderService>();
+			services.AddScoped<IProductRepository, ProductRepository>();
+			services.AddScoped<IProductService, ProductService>();
+		}
     }
 }
