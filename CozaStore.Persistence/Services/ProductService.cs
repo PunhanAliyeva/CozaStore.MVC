@@ -6,9 +6,16 @@ namespace CozaStore.MVC.Persistence.Services
 {
 	public class ProductService : Service<Product>, IProductService
 	{
-		public ProductService(IRepository<Product> repository) : base(repository)
-		{
+		private readonly IProductRepository _repository;
 
+		public ProductService(IProductRepository repository) : base(repository)
+		{
+			_repository = repository;
+		}
+
+		public async Task<List<Product>> GetProductsWithCategoryAndImagesAsync()
+		{
+			return await _repository.GetProductsWithCategoryAndImagesAsync();
 		}
 	}
 }

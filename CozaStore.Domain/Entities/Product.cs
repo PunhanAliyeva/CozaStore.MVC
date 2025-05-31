@@ -1,4 +1,5 @@
 ﻿using CozaStore.MVC.Domain.Commons;
+using CozaStore.MVC.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CozaStore.MVC.Entities
@@ -17,6 +18,7 @@ namespace CozaStore.MVC.Entities
 		   ProductImages.FirstOrDefault().ImageUrl) : null;
 		public List<ProductSizes> ProductSizes { get; set; }
 		public List<ProductColors> ProductColors { get; set; }
+		public List<ProductTags> ProductTags { get; set; }
         public Product()
         {
             ProductImages = new();

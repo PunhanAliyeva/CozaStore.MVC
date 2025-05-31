@@ -1,5 +1,6 @@
 ﻿
 using CozaStore.MVC.Domain.Commons;
+using CozaStore.MVC.Domain.Entities;
 
 namespace CozaStore.MVC.Entities
 {
@@ -7,7 +8,7 @@ namespace CozaStore.MVC.Entities
 	{
         public int BlogId { get; set; }
         public Blog Blog { get; set; }
-        public int TagId { get; set; }
-        public Tag Tag { get; set; }
+        public int BlogTagId { get; set; }
+        public BlogTag BlogTag { get; set; }
     }
 }
