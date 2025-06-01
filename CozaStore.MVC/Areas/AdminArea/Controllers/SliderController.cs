@@ -71,17 +71,18 @@ namespace CozaStore.MVC.AdminPanel.Controllers
             try
             {
                 await _sliderService.UpdateAsync(sliderUpdateDTO);
-                return RedirectToAction(nameof(Index));
             }
             catch (ArgumentException ex)
             {
                 ModelState.AddModelError("Photo", ex.Message);
+                return View(sliderUpdateDTO);
             }
             catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
+
             }
-            return View(sliderUpdateDTO);
+            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Detail(int id)

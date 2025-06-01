@@ -33,6 +33,7 @@ namespace CozaStore.MVC.Persistence.Services
             Slider slider = new() { Title = sliderCreateDTO.Title, SubTitle = sliderCreateDTO.SubTitle, ImageUrl = fileName };
 
             await _repository.AddAsync(slider);
+            await _repository.SaveAsync();
         }
 
         public async Task UpdateAsync(SliderUpdateDTO sliderUpdateDTO)
@@ -58,7 +59,45 @@ namespace CozaStore.MVC.Persistence.Services
                 slider.ImageUrl = newFileName;
             }
             _repository.Update(slider);
-
+            await _repository.SaveAsync();
         }
+        //public async Task UpdateAsync(SliderUpdateDTO sliderUpdateDTO)
+        //{
+        //    var slider = await _repository.GetByIdAsync(sliderUpdateDTO.Id);
+        //    if (slider == null)
+        //        throw new KeyNotFoundException("Slider tapılmadı.");
+
+        //    // Mətni güncəllə
+        //    slider.Title = sliderUpdateDTO.Title?.Trim() ?? slider.Title;
+        //    slider.SubTitle = sliderUpdateDTO.SubTitle?.Trim() ?? slider.SubTitle;
+
+        //    // Yeni şəkil göndərilibsə
+        //    if (sliderUpdateDTO.Photo is { Length: > 0 })
+        //    {
+        //        // Format yoxlaması
+        //        if (!sliderUpdateDTO.Photo.CheckImage())
+        //            throw new ArgumentException("Yalnız şəkil faylı göndərilə bilər!");
+
+        //        // Ölçü yoxlaması (2MB = 2000KB)
+        //        if (sliderUpdateDTO.Photo.CheckImageSize(2000))
+        //            throw new ArgumentException("Şəkilin ölçüsü 2MB-dan çox ola bilməz!");
+
+        //        // Fayl adı və saxlanılması
+        //        string newFileName = sliderUpdateDTO.Photo.SaveFile("uploads", "images");
+
+        //        // Köhnə faylı sil
+        //        if (!string.IsNullOrEmpty(slider.ImageUrl))
+        //        {
+        //            string oldFilePath = Path.Combine("wwwroot", "uploads", "images", slider.ImageUrl);
+        //            if (File.Exists(oldFilePath))
+        //                File.Delete(oldFilePath);
+        //        }
+
+        //        slider.ImageUrl = newFileName;
+        //    }
+
+        //    _repository.Update(slider);
+        //    await _repository.SaveAsync();
+        //}
     }
 }
