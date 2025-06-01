@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CozaStore.Application\CozaStore.Application.csproj" />
+  </ItemGroup>
+
 </Project>

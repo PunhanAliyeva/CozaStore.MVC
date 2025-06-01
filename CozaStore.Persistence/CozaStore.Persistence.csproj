@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CozaStore.Application\CozaStore.Application.csproj" />
     <ProjectReference Include="..\CozaStore.Domain\CozaStore.Domain.csproj" />
+    <ProjectReference Include="..\CozaStore.Infrastructure\CozaStore.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
