@@ -23,8 +23,8 @@ namespace CozaStore.MVC.Controllers
 		{
 			BlogVM blogVM = new()
 			{
-				Blogs = await _blogService.GetAllAsync(),
-				Products = await _productService.GetAllAsync(),
+				Blogs = await _blogService.GetBlogsWithBlogCategories(),
+				FeaturedProducts = await _productService.GetFeaturedProductsAsync(3),
 				BlogCategories = await _blogCategoryService.GetAllAsync(),
 				BlogTags = await _blogTagService.GetAllAsync()
 			};

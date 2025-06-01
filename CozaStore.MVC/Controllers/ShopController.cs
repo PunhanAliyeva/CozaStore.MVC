@@ -20,7 +20,7 @@ namespace CozaStore.MVC.Controllers
 			ShopVM shopVM = new()
 			{
 				Categories = await _categoryService.GetAllAsync(),
-				Products=await _productService.GetAllAsync()
+				Products=await _productService.GetProductsWithCategoryAndImagesAsync()
 			};
 			return View(shopVM);
 		}

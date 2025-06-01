@@ -14,6 +14,15 @@ namespace CozaStore.MVC.Persistence.Repositories
 			_context = context;
 		}
 
+		public async Task<List<Product>> GetFeaturedProductsAsync(int takeCount)
+		{
+			return await _context.Products
+				.Where(p=>p.IsFeatured)
+				.Include(p => p.ProductImages)
+				.Take(takeCount)
+				.ToListAsync();
+		}
+
 		public async Task<List<Product>> GetProductsWithCategoryAndImagesAsync()
 		{
 			return await _context.Products
@@ -21,6 +30,5 @@ namespace CozaStore.MVC.Persistence.Repositories
 				.Include(p=>p.ProductImages)
 				.ToListAsync();
 		}
-		
 	}
 }

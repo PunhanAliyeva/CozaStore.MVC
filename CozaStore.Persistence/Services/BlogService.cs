@@ -6,9 +6,16 @@ namespace CozaStore.MVC.Persistence.Services
 {
 	public class BlogService : Service<Blog>, IBlogService
 	{
-		public BlogService(IRepository<Blog> repository) : base(repository)
-		{
+		private readonly IBlogRepository _repository;
 
+		public BlogService(IBlogRepository repository) : base(repository)
+		{
+			_repository = repository;
+		}
+
+		public async Task<List<Blog>> GetBlogsWithBlogCategories()
+		{
+			return await _repository.GetBlogsWithBlogCategories();
 		}
 	}
 }

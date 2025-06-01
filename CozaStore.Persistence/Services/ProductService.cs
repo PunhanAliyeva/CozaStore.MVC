@@ -13,6 +13,11 @@ namespace CozaStore.MVC.Persistence.Services
 			_repository = repository;
 		}
 
+		public async Task<List<Product>> GetFeaturedProductsAsync(int takeCount)
+		{
+			return await _repository.GetFeaturedProductsAsync(takeCount);
+		}
+
 		public async Task<List<Product>> GetProductsWithCategoryAndImagesAsync()
 		{
 			return await _repository.GetProductsWithCategoryAndImagesAsync();
