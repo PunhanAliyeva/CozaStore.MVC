@@ -4,6 +4,6 @@ namespace CozaStore.MVC.Domain.Interfaces.IRepositories
 {
 	public interface IAboutRepository:IRepository<About>
 	{
-		Task<About?> GetFirstAsync();
+		Task<About> GetFirstAsync();
 	}
 }

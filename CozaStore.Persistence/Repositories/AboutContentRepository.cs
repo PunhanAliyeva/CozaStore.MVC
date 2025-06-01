@@ -14,7 +14,7 @@ namespace CozaStore.MVC.Persistence.Repositories
 			_context = context;
 		}
 
-		public async Task<AboutContent?> GetFirstAsync()
+		public async Task<AboutContent> GetFirstAsync()
 		{
 			return await _context.AboutContents.FirstOrDefaultAsync();
 		}

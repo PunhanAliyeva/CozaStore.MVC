@@ -13,7 +13,7 @@ namespace CozaStore.MVC.Persistence.Services
 			_repository = repository;
 		}
 
-		public async Task<AboutContent?> GetFirstAsync()
+		public async Task<AboutContent> GetFirstAsync()
 		{
 			return await _repository.GetFirstAsync();
 		}
