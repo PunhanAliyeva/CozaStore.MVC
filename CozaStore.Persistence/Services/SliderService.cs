@@ -2,7 +2,6 @@
 using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
-using CozaStore.MVC.Persistence.Repositories;
 using CozaStore.MVC.Infrastructure.Extensions;
 using CozaStore.MVC.Persistence.Helpers;
 
@@ -58,46 +57,19 @@ namespace CozaStore.MVC.Persistence.Services
                 FileHelper.DeleteFile("uploads", "images", slider.ImageUrl);
                 slider.ImageUrl = newFileName;
             }
+            slider.UpdatedAt = DateTime.UtcNow;
             _repository.Update(slider);
             await _repository.SaveAsync();
         }
-        //public async Task UpdateAsync(SliderUpdateDTO sliderUpdateDTO)
-        //{
-        //    var slider = await _repository.GetByIdAsync(sliderUpdateDTO.Id);
-        //    if (slider == null)
-        //        throw new KeyNotFoundException("Slider tapılmadı.");
+        public async Task DeleteAsync(int id)
+        {
+            var slider = await _repository.GetByIdAsync(id);
+            if (slider == null) throw new KeyNotFoundException("Slayd tapılmadı");
 
-        //    // Mətni güncəllə
-        //    slider.Title = sliderUpdateDTO.Title?.Trim() ?? slider.Title;
-        //    slider.SubTitle = sliderUpdateDTO.SubTitle?.Trim() ?? slider.SubTitle;
-
-        //    // Yeni şəkil göndərilibsə
-        //    if (sliderUpdateDTO.Photo is { Length: > 0 })
-        //    {
-        //        // Format yoxlaması
-        //        if (!sliderUpdateDTO.Photo.CheckImage())
-        //            throw new ArgumentException("Yalnız şəkil faylı göndərilə bilər!");
-
-        //        // Ölçü yoxlaması (2MB = 2000KB)
-        //        if (sliderUpdateDTO.Photo.CheckImageSize(2000))
-        //            throw new ArgumentException("Şəkilin ölçüsü 2MB-dan çox ola bilməz!");
-
-        //        // Fayl adı və saxlanılması
-        //        string newFileName = sliderUpdateDTO.Photo.SaveFile("uploads", "images");
-
-        //        // Köhnə faylı sil
-        //        if (!string.IsNullOrEmpty(slider.ImageUrl))
-        //        {
-        //            string oldFilePath = Path.Combine("wwwroot", "uploads", "images", slider.ImageUrl);
-        //            if (File.Exists(oldFilePath))
-        //                File.Delete(oldFilePath);
-        //        }
-
-        //        slider.ImageUrl = newFileName;
-        //    }
-
-        //    _repository.Update(slider);
-        //    await _repository.SaveAsync();
-        //}
+            slider.DeletedAt = DateTime.UtcNow;
+            _repository.Update(slider);
+            FileHelper.DeleteFile("uploads", "images", slider.ImageUrl);
+            await _repository.SaveAsync();
+        }
     }
 }
