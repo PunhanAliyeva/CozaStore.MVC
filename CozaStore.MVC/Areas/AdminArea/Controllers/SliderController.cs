@@ -45,17 +45,16 @@ namespace CozaStore.MVC.AdminPanel.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
                 await _sliderService.DeleteAsync(id);
-                return RedirectToAction(nameof(Index));
+                return Json(new { success = true });
             }
             catch (KeyNotFoundException ex)
             {
-                return NotFound(ex.Message);
+                return Json(new { success = false, message = ex.Message });
             }
         }
 
