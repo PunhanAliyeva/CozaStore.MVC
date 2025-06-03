@@ -1,4 +1,6 @@
 ﻿using CozaStore.MVC.Application.DTOs.SliderDTOs;
+using CozaStore.MVC.Application.DTOs.TagDTOs;
+using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
@@ -18,6 +20,9 @@ namespace CozaStore.MVC.Persistence.Services
 
         public async Task CreateAsync(SliderCreateDTO sliderCreateDTO)
         {
+            if (await _repository.AnyAsync(s => s.Title.Trim().ToLower() == sliderCreateDTO.Title.Trim().ToLower()))
+                throw new ValidationException("Title", "Bu başlıqda slayd artıq mövcuddur!");
+
             if (sliderCreateDTO.Photo == null || sliderCreateDTO.Photo.Length == 0)
                 throw new ArgumentException("Şəkil boş ola bilməz!");
 
@@ -29,7 +34,7 @@ namespace CozaStore.MVC.Persistence.Services
 
             string fileName = sliderCreateDTO.Photo.SaveFile("uploads", "images");
 
-            Slider slider = new() { Title = sliderCreateDTO.Title, SubTitle = sliderCreateDTO.SubTitle, ImageUrl = fileName };
+            Slider slider = new() { Title = sliderCreateDTO.Title, SubTitle = sliderCreateDTO.SubTitle, ImageUrl = fileName,CreatedAt=DateTime.UtcNow };
 
             await _repository.AddAsync(slider);
             await _repository.SaveAsync();

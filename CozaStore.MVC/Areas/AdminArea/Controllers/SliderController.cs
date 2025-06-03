@@ -4,6 +4,7 @@ using CozaStore.MVC.Entities;
 using Microsoft.AspNetCore.Mvc;
 using CozaStore.MVC.Infrastructure.Extensions;
 using Humanizer;
+using CozaStore.MVC.Application.Exceptions;
 
 namespace CozaStore.MVC.AdminPanel.Controllers
 {
@@ -28,20 +29,25 @@ namespace CozaStore.MVC.AdminPanel.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Create(SliderCreateDTO sliderCreateDTO)
         {
             if (!ModelState.IsValid) return View(sliderCreateDTO);
             try
             {
                 await _sliderService.CreateAsync(sliderCreateDTO);
+                return RedirectToAction(nameof(Index));
             }
             catch (ArgumentException ex)
             {
-                ModelState.AddModelError("", ex.Message);
+                ModelState.AddModelError("Photo", ex.Message);
                 return View(sliderCreateDTO);
             }
-            return RedirectToAction(nameof(Index));
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError("Title", ex.Message);
+                return View(sliderCreateDTO);
+            }
         }
 
         [HttpPost]
@@ -67,7 +73,7 @@ namespace CozaStore.MVC.AdminPanel.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Update(int id, SliderUpdateDTO sliderUpdateDTO)
         {
             if (id != sliderUpdateDTO.Id) return BadRequest();
@@ -75,6 +81,7 @@ namespace CozaStore.MVC.AdminPanel.Controllers
             try
             {
                 await _sliderService.UpdateAsync(sliderUpdateDTO);
+                return RedirectToAction(nameof(Index));
             }
             catch (ArgumentException ex)
             {
@@ -86,7 +93,6 @@ namespace CozaStore.MVC.AdminPanel.Controllers
                 return NotFound(ex.Message);
 
             }
-            return RedirectToAction(nameof(Index));
         }
 
         public async Task<IActionResult> Detail(int id)

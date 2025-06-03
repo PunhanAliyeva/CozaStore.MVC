@@ -1,4 +1,5 @@
 ﻿using CozaStore.MVC.Domain.Commons;
+using System.Linq.Expressions;
 
 namespace CozaStore.MVC.Domain.Interfaces.IRepositories
 {
@@ -10,6 +11,7 @@ namespace CozaStore.MVC.Domain.Interfaces.IRepositories
         void Update(T entity);
         void Delete(T entity);
         Task SaveAsync();
+        Task<bool> AnyAsync(Expression<Func<T, bool>> predicate);
     }
 }
 

@@ -35,6 +35,8 @@ namespace CozaStore.MVC.Persistence
 			services.AddScoped<IBlogCategoryService, BlogCategoryService>();
 			services.AddScoped<IBlogTagRepository, BlogTagRepository>();
 			services.AddScoped<IBlogTagService, BlogTagService>();
+			services.AddScoped<ITagRepository, TagRepository>();
+			services.AddScoped<ITagService,TagService>();
 		}
     }
 }

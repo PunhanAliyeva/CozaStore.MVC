@@ -2,6 +2,7 @@
 using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace CozaStore.MVC.Persistence.Repositories
 {
@@ -43,6 +44,11 @@ namespace CozaStore.MVC.Persistence.Repositories
         public async Task SaveAsync()
         {
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _table.AnyAsync(predicate);
         }
     }
 }
