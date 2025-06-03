@@ -5,7 +5,6 @@ namespace CozaStore.MVC.Domain.Interfaces.IServices
 {
 	public interface IAboutService:IService<About>
 	{
-		Task<About> GetFirstAsync();
 		Task CreateAsync(AboutCreateDTO aboutCreateDTO);
 		Task UpdateAsync(AboutUpdateDTO aboutUpdateDTO);
 	}

@@ -1,5 +1,4 @@
 ﻿using CozaStore.MVC.Application.DTOs.SliderDTOs;
-using CozaStore.MVC.Application.DTOs.TagDTOs;
 using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Domain.Interfaces.IServices;

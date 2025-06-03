@@ -1,26 +1,20 @@
 ﻿using CozaStore.MVC.Application.DTOs.AboutDTOs;
-using CozaStore.MVC.Application.DTOs.SliderDTOs;
+using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
 using CozaStore.MVC.Infrastructure.Extensions;
 using CozaStore.MVC.Persistence.Helpers;
-using CozaStore.MVC.Persistence.Repositories;
-using Microsoft.EntityFrameworkCore;
 
 namespace CozaStore.MVC.Persistence.Services
 {
-	public class AboutService : Service<About>, IAboutService
+    public class AboutService : Service<About>, IAboutService
 	{
-		private readonly IAboutRepository _repository;
+		private readonly IRepository<About> _repository;
 
-		public AboutService(IAboutRepository repository) : base(repository)
+		public AboutService(IRepository<About> repository) : base(repository)
 		{
 			_repository = repository;
-		}
-		public async Task<About> GetFirstAsync()
-		{
-			return await _repository.GetFirstAsync();
 		}
 		public async Task CreateAsync(AboutCreateDTO aboutCreateDTO)
 		{
@@ -31,7 +25,9 @@ namespace CozaStore.MVC.Persistence.Services
 			if (aboutCreateDTO.Photo.CheckImageSize(2000))
 				throw new ArgumentException("Şəklin ölçüsü 2MB-dan çox olmamalıdır!");
             string fileName = aboutCreateDTO.Photo.SaveFile("uploads", "images");
-            About about = new() { Title=aboutCreateDTO.Title,Description=aboutCreateDTO.Description,ImageUrl=fileName,UpdatedAt=DateTime.UtcNow};
+            if (await _repository.AnyAsync(a => a.Title.Trim().ToLower() == aboutCreateDTO.Title.Trim().ToLower()))
+                throw new ValidationException("Title", "Bu adda başlıq artıq mövcuddur!");
+            About about = new() { Title=aboutCreateDTO.Title,Description=aboutCreateDTO.Description,ImageUrl=fileName,CreatedAt=DateTime.UtcNow};
 			await _repository.AddAsync(about);
 			await _repository.SaveAsync();
 		}
@@ -40,7 +36,7 @@ namespace CozaStore.MVC.Persistence.Services
         {
             var about = await _repository.GetByIdAsync(aboutUpdateDTO.Id);
             if (about == null)
-                throw new KeyNotFoundException("Slayd tapılmadı");
+                throw new KeyNotFoundException("Haqqında tapılmadı");
 
             about.Title = aboutUpdateDTO.Title;
             about.Description = aboutUpdateDTO.Description;

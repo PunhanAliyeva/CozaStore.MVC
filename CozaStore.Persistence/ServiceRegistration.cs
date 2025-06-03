@@ -27,8 +27,6 @@ namespace CozaStore.MVC.Persistence
 			services.AddScoped<IProductService, ProductService>();
 			services.AddScoped<IAboutRepository, AboutRepository>();
 			services.AddScoped<IAboutService, AboutService>();
-			services.AddScoped<IAboutContentRepository, AboutContentRepository>();
-			services.AddScoped<IAboutContentService, AboutContentService>();
 			services.AddScoped<IBlogRepository, BlogRepository>();
 			services.AddScoped<IBlogService, BlogService>();
 			services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();

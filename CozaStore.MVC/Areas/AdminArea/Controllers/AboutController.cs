@@ -1,7 +1,11 @@
 ﻿using CozaStore.MVC.Application.DTOs.AboutDTOs;
+using CozaStore.MVC.Application.DTOs.SliderDTOs;
+using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
+using CozaStore.MVC.Persistence.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Identity.Client;
 
 namespace CozaStore.MVC.Areas.AdminArea.Controllers
 {
@@ -32,23 +36,52 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
                 await _aboutService.CreateAsync(aboutCreateDTO);
                 return RedirectToAction(nameof(Index));
             }
-            catch (Exception ex)
+            catch (ValidationException ex)
             {
-                ModelState.AddModelError("",ex.Message);
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
+                return View(aboutCreateDTO);
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("Photo", ex.Message);
                 return View(aboutCreateDTO);
             }
         }
         public async Task<IActionResult> Detail(int id)
         {
             var about = await _aboutService.GetByIdAsync(id);
-            if (about is null) return NotFound();
+            if (about == null) return NotFound();
             return View(about);
         }
-        //public async Task<IActionResult> Update(int id,AboutUpdateDTO aboutUpdateDTO)
-        //{
-        //    if (id != aboutUpdateDTO.Id) return BadRequest();
-        //    if(model)
-        //}
+        public async Task<IActionResult> Update(int id)
+        {
+            var about = await _aboutService.GetByIdAsync(id);
+            if (about == null) return NotFound();
+            AboutUpdateDTO aboutUpdateDTO = new() { Title = about.Title, Description = about.Description, ImageUrl = about.ImageUrl };
+            return View(aboutUpdateDTO);
+        }
+
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Update(int id, AboutUpdateDTO aboutUpdateDTO)
+        {
+            if (id != aboutUpdateDTO.Id) return BadRequest();
+            if (!ModelState.IsValid) return View(aboutUpdateDTO);
+            try
+            {
+                await _aboutService.UpdateAsync(aboutUpdateDTO);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("Photo", ex.Message);
+                return View(aboutUpdateDTO);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
 
     }
 }

@@ -1,10 +1,7 @@
 ﻿using CozaStore.MVC.Application.DTOs.SliderDTOs;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
-using Microsoft.AspNetCore.Mvc;
-using CozaStore.MVC.Infrastructure.Extensions;
-using Humanizer;
 using CozaStore.MVC.Application.Exceptions;
+using CozaStore.MVC.Domain.Interfaces.IServices;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CozaStore.MVC.AdminPanel.Controllers
 {

@@ -1,26 +1,23 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IRepositories;
+﻿using CozaStore.MVC.Application.DTOs.AboutDTOs;
+using CozaStore.MVC.Application.DTOs.SliderDTOs;
+using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Persistence.Repositories;
-using CozaStore.MVC.ViewModels;
+using CozaStore.MVC.Persistence.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CozaStore.MVC.Controllers
 {
-	public class AboutController : Controller
+    public class AboutController : Controller
 	{
 		private readonly IAboutService _aboutService;
-		private readonly IAboutContentService _aboutContentService;
-		public AboutController(IAboutService aboutService, IAboutContentService aboutContentService)
+		public AboutController(IAboutService aboutService)
 		{
 			_aboutService = aboutService;
-			_aboutContentService = aboutContentService;
 		}
 		public async Task<IActionResult> Index()
 		{
-			var about = await _aboutService.GetFirstAsync();
-			var aboutContent= await _aboutContentService.GetFirstAsync();
-			AboutVM aboutVM = new() { About = about, AboutContent = aboutContent };
-			return View(aboutVM);
+			var abouts = await _aboutService.GetAllAsync();
+			return View(abouts);
 		}
-	}
+    }
 }

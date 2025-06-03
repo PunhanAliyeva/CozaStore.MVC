@@ -1,10 +1,8 @@
-﻿using CozaStore.MVC.Application.DTOs.SliderDTOs;
-using CozaStore.MVC.Application.DTOs.TagDTOs;
+﻿using CozaStore.MVC.Application.DTOs.TagDTOs;
 using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
-using CozaStore.MVC.Persistence.Helpers;
 
 namespace CozaStore.MVC.Persistence.Services
 {
@@ -21,7 +19,7 @@ namespace CozaStore.MVC.Persistence.Services
             if (string.IsNullOrWhiteSpace(tagCreateDTO.Name))
                 throw new ArgumentException("Teq adı boş ola bilməz!");
             if (await _repository.AnyAsync(t => t.Name.Trim().ToLower() == tagCreateDTO.Name.Trim().ToLower()))
-                throw new ArgumentException("Bu adda teq artıq mövcuddur.");
+                throw new ArgumentException("Bu adda teq artıq mövcuddur!");
             Tag tag = new() { Name=tagCreateDTO.Name,CreatedAt=DateTime.UtcNow };
             await _repository.AddAsync(tag);
             await _repository.SaveAsync();

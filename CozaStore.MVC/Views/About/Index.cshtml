@@ -1,67 +1,44 @@
-﻿@model AboutVM
-<!-- Title page -->
-<section class="bg-img1 txt-center p-lr-15 p-tb-92" style="background-image: url('assets/images/bg-01.jpg');">
-	<h2 class="ltext-105 cl0 txt-center">
-		About
-	</h2>
-</section>
+﻿@model IEnumerable<About>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Haqqında cədvəli</h4>
+                    <p class="card-description">
+                        <a asp-controller="about" asp-action="create" class="btn btn-warning">Yarat</a>
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Şəkil</th>
+                                    <th>Başlıq</th>
+                                    <th>Açıqlama</th>
+                                    <th>Parametrlər</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
+                                @foreach (var about in Model)
+                                {
+                                    <tr>
+                                        <td><img src="~/uploads/images/@about.ImageUrl" width="150" height="150" /></td>
+                                        <td>@about.Title</td>
+                                        <td>@about.Description</td>
+                                        <td>
+                                            <a asp-action="update" asp-route-id="@about.Id" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a asp-action="detail" asp-route-id="@about.Id" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></a>
+                                            <button class="btn btn-danger delete-about" data-id="@about.Id"><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
-<!-- Content page -->
-<section class="bg0 p-t-75 p-b-120">
-	<div class="container">
-		<div class="row p-b-148">
-			<div class="col-md-7 col-lg-8">
-				<div class="p-t-7 p-r-85 p-r-15-lg p-r-0-md">
-					<h3 class="mtext-111 cl2 p-b-16">
-						@Model.About.Title
-					</h3>
-
-					<p class="stext-113 cl6 p-b-26">
-					    @Model.About.Description
-					</p>
-				</div>
-			</div>
-
-			<div class="col-11 col-md-5 col-lg-4 m-lr-auto">
-				<div class="how-bor1 ">
-					<div class="hov-img0">
-						<img src="~/assets/images/@Model.About.ImageUrl" alt="IMG">
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="order-md-2 col-md-7 col-lg-8 p-b-30">
-				<div class="p-t-7 p-l-85 p-l-15-lg p-l-0-md">
-					<h3 class="mtext-111 cl2 p-b-16">
-						@Model.AboutContent
-					</h3>
-
-					<p class="stext-113 cl6 p-b-26">
-						@Model.AboutContent.Description
-					</p>
-
-					<div class="bor16 p-l-29 p-b-9 m-t-22">
-						<p class="stext-114 cl6 p-r-40 p-b-11">
-							@Model.AboutContent.Feedback
-						</p>
-
-						<span class="stext-111 cl8">
-							- @Model.AboutContent.AuthorName’s
-						</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="order-md-1 col-11 col-md-5 col-lg-4 m-lr-auto p-b-30">
-				<div class="how-bor2">
-					<div class="hov-img0">
-						<img src="~/assets/images/@Model.AboutContent.ImageUrl" alt="IMG">
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>

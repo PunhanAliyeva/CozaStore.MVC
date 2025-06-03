@@ -83,13 +83,12 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
             }
             catch (ValidationException ex)
             {
-                ModelState.AddModelError("Name", ex.Message);
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
                 return View(tagUpdateDTO);
             }
             catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
-
             }
         }
     }

@@ -14,7 +14,6 @@ namespace CozaStore.MVC.Persistence.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<About> Abouts { get; set; }
-        public DbSet<AboutContent> AboutContents { get; set; }
         public DbSet<Blog> Blogs { get; set; }
         public DbSet<BlogCategory> BlogCategories { get; set; }
         public DbSet<BlogTag> BlogTags { get; set; }
