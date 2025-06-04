@@ -1,4 +1,5 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IRepositories;
+﻿using CozaStore.Domain.Interfaces.IServices;
+using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Persistence.Data;
 using CozaStore.MVC.Persistence.Repositories;
@@ -35,6 +36,8 @@ namespace CozaStore.MVC.Persistence
 			services.AddScoped<IBlogTagService, BlogTagService>();
 			services.AddScoped<ITagRepository, TagRepository>();
 			services.AddScoped<ITagService,TagService>();
+			services.AddScoped<IColorRepository, ColorRepository>();
+			services.AddScoped<IColorService, ColorService>();
 		}
     }
 }

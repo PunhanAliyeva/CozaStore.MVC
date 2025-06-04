@@ -7,5 +7,6 @@ namespace CozaStore.MVC.Domain.Interfaces.IServices
 	{
 		Task CreateAsync(BlogCategoryCreateDTO blogCategoryCreateDTOn);
 		Task UpdateAsync(BlogCategoryUpdateDTO blogCategoryUpdateDTOn);
+		Task DeleteAsync(int id);
 	}
 }

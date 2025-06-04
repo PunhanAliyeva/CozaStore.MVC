@@ -28,6 +28,15 @@ namespace CozaStore.MVC.Persistence.Services
             await _repository.SaveAsync();
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var blogCategory = await _repository.GetByIdAsync(id);
+            if (blogCategory is null) throw new KeyNotFoundException("Bloq-Kateqoriya tapılmadı!");
+            blogCategory.DeletedAt=DateTime.UtcNow;
+            _repository.Update(blogCategory);
+            await _repository.SaveAsync();
+        }
+
         public async Task UpdateAsync(BlogCategoryUpdateDTO blogCategoryUpdateDTO)
         {
             var blogCategory = await _repository.GetByIdAsync(blogCategoryUpdateDTO.Id);

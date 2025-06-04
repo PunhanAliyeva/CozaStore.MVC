@@ -50,11 +50,9 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Delete(int id)
         {
-            var tag = await _tagService.GetByIdAsync(id);
-            if (tag is null) return NotFound();
             try
             {
-                await _tagService.DeleteAsync(tag);
+                await _tagService.DeleteAsync(id);
                 return Json(new { success = true });
             }
             catch (KeyNotFoundException ex)

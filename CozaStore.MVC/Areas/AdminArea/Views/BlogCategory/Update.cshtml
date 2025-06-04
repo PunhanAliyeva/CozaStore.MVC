@@ -1,0 +1,24 @@
+﻿@using CozaStore.MVC.Application.DTOs.BlogCategoryDTOs
+@model BlogCategoryUpdateDTO
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Bloq-Kateqoriya cədvəlinin dəyişdirilməsi</h4>
+                    <p class="card-description">
+                        <a asp-action="index" class="btn btn-info">Geriyə qayıt</a>
+                    </p>
+                    <form class="forms-sample" method="post">
+                        <div class="form-group">
+                            <label asp-for="Name">Ad</label>
+                            <input asp-for="Name" class="form-control" placeholder="Ad daxil edin">
+                            <span asp-validation-for=Name class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

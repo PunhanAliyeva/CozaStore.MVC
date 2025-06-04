@@ -1,9 +1,8 @@
 ﻿using CozaStore.MVC.Application.DTOs.BlogCategoryDTOs;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using Microsoft.AspNetCore.Mvc;
 using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Application.DTOs.TagDTOs;
+using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Persistence.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace CozaStore.MVC.Areas.AdminArea.Controllers
 {
@@ -38,10 +37,10 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
             }
             catch (ArgumentException ex)
             {
-                ModelState.AddModelError("Name",ex.Message);
+                ModelState.AddModelError("Name", ex.Message);
                 return View(blogCategoryCreateDTO);
             }
-            catch(ValidationException ex)
+            catch (ValidationException ex)
             {
                 ModelState.AddModelError(ex.PropertyName, ex.Message);
                 return View(blogCategoryCreateDTO);
@@ -76,5 +75,24 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
                 return NotFound(ex.Message);
             }
         }
-    }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _blogCategoryService.DeleteAsync(id);
+                return Json(new { success = true });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+        public async Task<IActionResult> Detail(int id)
+        {
+            var blogCategory = await _blogCategoryService.GetByIdAsync(id);
+            if (blogCategory is null) return NotFound();
+            return View(blogCategory);
+        }
+}
 }
