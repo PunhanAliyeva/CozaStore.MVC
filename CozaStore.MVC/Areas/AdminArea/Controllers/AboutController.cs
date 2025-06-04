@@ -81,6 +81,24 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
             {
                 return NotFound(ex.Message);
             }
+            catch(ValidationException ex)
+            {
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
+                return View(aboutUpdateDTO);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _aboutService.DeleteAsync(id);
+                return Json(new { success = true });
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
         }
 
     }

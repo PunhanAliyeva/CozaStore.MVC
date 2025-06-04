@@ -36,11 +36,9 @@ namespace CozaStore.MVC.Persistence.Services
         public async Task UpdateAsync(TagUpdateDTO tagUpdateDTO)
         {
             var tag = await _repository.GetByIdAsync(tagUpdateDTO.Id);
-            if (tag == null)
-                throw new KeyNotFoundException("Teq tapılmadı");
+            if (tag == null) throw new KeyNotFoundException("Teq tapılmadı");
             var isExist = await _repository.AnyAsync(t => t.Name.Trim().ToLower() == tagUpdateDTO.Name.Trim().ToLower() && t.Id != tagUpdateDTO.Id);
-            if (isExist)
-                throw new ValidationException("Name","Eyniadlı teq əlavə etmək olmaz!");
+            if (isExist) throw new ValidationException("Name","Eyniadlı teq əlavə etmək olmaz!");
             tag.Name = tagUpdateDTO.Name;
             tag.UpdatedAt = DateTime.UtcNow;
             _repository.Update(tag);

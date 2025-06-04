@@ -5,6 +5,7 @@ using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
 using CozaStore.MVC.Infrastructure.Extensions;
 using CozaStore.MVC.Persistence.Helpers;
+using Microsoft.Identity.Client;
 
 namespace CozaStore.MVC.Persistence.Services
 {
@@ -32,12 +33,25 @@ namespace CozaStore.MVC.Persistence.Services
 			await _repository.SaveAsync();
 		}
 
+        public async Task DeleteAsync(int id)
+        {
+            var about=await _repository.GetByIdAsync(id);
+            if (about == null)
+                throw new KeyNotFoundException("Haqqında tapılmadı!");
+
+            about.DeletedAt = DateTime.UtcNow;
+            _repository.Update(about);
+            FileHelper.DeleteFile("uploads", "images", about.ImageUrl);
+            await _repository.SaveAsync();
+        }
+
         public async Task UpdateAsync(AboutUpdateDTO aboutUpdateDTO)
         {
             var about = await _repository.GetByIdAsync(aboutUpdateDTO.Id);
             if (about == null)
-                throw new KeyNotFoundException("Haqqında tapılmadı");
-
+                throw new KeyNotFoundException("Haqqında tapılmadı!");
+            if (await _repository.AnyAsync(a => a.Title.Trim().ToLower() == aboutUpdateDTO.Title.Trim().ToLower()))
+                throw new ValidationException("Title", "Bu başlıq artıq mövcuddur!");
             about.Title = aboutUpdateDTO.Title;
             about.Description = aboutUpdateDTO.Description;
             aboutUpdateDTO.ImageUrl = about.ImageUrl;
@@ -58,5 +72,6 @@ namespace CozaStore.MVC.Persistence.Services
             _repository.Update(about);
             await _repository.SaveAsync();
         }
+      
     }
 }
