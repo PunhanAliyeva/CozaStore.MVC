@@ -69,9 +69,7 @@ namespace CozaStore.MVC.Persistence.Services
         {
             var slider = await _repository.GetByIdAsync(id);
             if (slider == null) throw new KeyNotFoundException("Slayd tapılmadı");
-
-            slider.DeletedAt = DateTime.UtcNow;
-            _repository.Update(slider);
+            _repository.Delete(slider);
             FileHelper.DeleteFile("uploads", "images", slider.ImageUrl);
             await _repository.SaveAsync();
         }

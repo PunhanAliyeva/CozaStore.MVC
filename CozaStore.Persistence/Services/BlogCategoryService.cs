@@ -30,8 +30,7 @@ namespace CozaStore.MVC.Persistence.Services
         {
             var blogCategory = await _repository.GetByIdAsync(id);
             if (blogCategory is null) throw new KeyNotFoundException("Bloq-Kateqoriya tapılmadı!");
-            blogCategory.DeletedAt=DateTime.UtcNow;
-            _repository.Update(blogCategory);
+            _repository.Delete(blogCategory);
             await _repository.SaveAsync();
         }
 

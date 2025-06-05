@@ -31,8 +31,7 @@ namespace CozaStore.MVC.Persistence.Services
         {
             var color = await _repository.GetByIdAsync(id);
             if (color == null) throw new KeyNotFoundException("Rəng tapılmadı");
-            color.DeletedAt = DateTime.UtcNow;
-            _repository.Update(color);
+            _repository.Delete(color);
             await _repository.SaveAsync();
         }
 

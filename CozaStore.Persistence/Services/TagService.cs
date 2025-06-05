@@ -28,8 +28,7 @@ namespace CozaStore.MVC.Persistence.Services
         {
             var tag = await _repository.GetByIdAsync(id);
             if (tag == null) throw new KeyNotFoundException("Teq tapılmadı");
-            tag.DeletedAt = DateTime.UtcNow;
-            _repository.Update(tag);
+            _repository.Delete(tag);
             await _repository.SaveAsync();
         }
 

@@ -29,8 +29,7 @@ namespace CozaStore.MVC.Persistence.Services
         {
             var blogTag = await _repository.GetByIdAsync(id);
             if (blogTag == null) throw new KeyNotFoundException("Bloq-Teq tapılmadı");
-            blogTag.DeletedAt = DateTime.UtcNow;
-            _repository.Update(blogTag);
+            _repository.Delete(blogTag);
             await _repository.SaveAsync();
         }
         public async Task UpdateAsync(BlogTagUpdateDTO blogTagUpdateDTO)

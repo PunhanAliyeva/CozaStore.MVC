@@ -37,9 +37,7 @@ namespace CozaStore.MVC.Persistence.Services
             var about=await _repository.GetByIdAsync(id);
             if (about == null)
                 throw new KeyNotFoundException("Haqqında tapılmadı!");
-
-            about.DeletedAt = DateTime.UtcNow;
-            _repository.Update(about);
+            _repository.Delete(about);
             FileHelper.DeleteFile("uploads", "images", about.ImageUrl);
             await _repository.SaveAsync();
         }
