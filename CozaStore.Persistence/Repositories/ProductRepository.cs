@@ -23,7 +23,7 @@ namespace CozaStore.MVC.Persistence.Repositories
 				.ToListAsync();
 		}
 
-		public async Task<List<Product>> GetProductsWithCategoryAndImagesAsync()
+		public async Task<List<Product>> GetProductsWithIncludesAsync()
 		{
 			return await _context.Products
 				.Include(p=>p.Category)

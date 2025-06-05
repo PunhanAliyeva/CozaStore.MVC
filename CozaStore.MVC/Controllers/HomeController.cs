@@ -22,7 +22,7 @@ namespace CozaStore.MVC.Controllers
             HomeVM homeVM = new();
             var sliders = await _sliderService.GetAllAsync();
             var categories=await _categoryService.GetAllAsync();
-            var products=await _productService.GetProductsWithCategoryAndImagesAsync();
+            var products=await _productService.GetProductsWithIncludesAsync();
             homeVM.Products = products;
             homeVM.Categories = categories;
             homeVM.Sliders = sliders;

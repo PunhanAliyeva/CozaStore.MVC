@@ -1,6 +1,11 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IServices;
+﻿using CozaStore.MVC.Application.DTOs.CategoryDTOs;
+using CozaStore.MVC.Application.DTOs.SliderDTOs;
+using CozaStore.MVC.Application.Exceptions;
+using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
+using CozaStore.MVC.Persistence.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CozaStore.MVC.AdminPanel.Controllers
 {
@@ -20,19 +25,33 @@ namespace CozaStore.MVC.AdminPanel.Controllers
             return View(categories);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Category category)
+        public async Task<IActionResult> Create(CategoryCreateDTO categoryCreateDTO)
         {
-            if (!ModelState.IsValid)
-                return View(category);
-            await _categoryService.AddAsync(category);
-            return RedirectToAction(nameof(Index));
+            ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
+            if (!ModelState.IsValid) return View(categoryCreateDTO);
+            try
+            {
+                await _categoryService.CreateAsync(categoryCreateDTO);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("Photo", ex.Message);
+                return View(categoryCreateDTO);
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
+                return View(categoryCreateDTO);
+            }
         }
 
         [HttpPost]

@@ -13,5 +13,6 @@ namespace CozaStore.MVC.Application.DTOs.AboutDTOs
         public string Description { get; set; }
         [Required(ErrorMessage = "Zəhmət olmasa şəkil əlavə edin!")]
         public IFormFile Photo { get; set; }
+
     }
 }

@@ -4,7 +4,7 @@ namespace CozaStore.MVC.Domain.Interfaces.IRepositories
 {
 	public interface IProductRepository:IRepository<Product>
 	{
-		Task<List<Product>> GetProductsWithCategoryAndImagesAsync();
+		Task<List<Product>> GetProductsWithIncludesAsync();
 		Task<List<Product>> GetFeaturedProductsAsync(int takeCount);
 	}
 }
