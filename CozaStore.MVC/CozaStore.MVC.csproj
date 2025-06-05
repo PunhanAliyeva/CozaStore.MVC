@@ -8,7 +8,7 @@
 
   <ItemGroup>
     <Folder Include="ViewComponents\" />
-    <Folder Include="wwwroot\uploads\images\" />
+    <Folder Include="wwwroot\assets\images\" />
   </ItemGroup>
 
   <ItemGroup>

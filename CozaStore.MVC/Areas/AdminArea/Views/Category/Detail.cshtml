@@ -1,0 +1,63 @@
+﻿@* @model Category
+
+<div class="card">
+    <div class="card-header">
+        <h5>
+            Kateqoriya haqqında
+        </h5>
+        <br>
+        <a asp-controller="category" asp-action="Index" class="btn btn-success mt-3 mb-5">Geriyə Qayıt</a>
+    </div>
+    <dv class="card-block">
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Şəkil</label>
+            <div class="col-sm-10">
+                @if (Model.ImageUrl == null)
+                {
+                    <span>Şəkil mövcud deyil</span>
+                }
+                else
+                {
+                    <img style="width:150px;height:110px;" src="~/uploads/images/@Model.ImageUrl" />
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Ad</label>
+            <div class="col-sm-10">
+                <input asp-for="Name" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Mövzu</label>
+            <div class="col-sm-10">
+                <input asp-for="Concept" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Aid olduğu kateqoriya</label>
+            <div class="col-sm-10">
+                @if (Model.ParentId == null)
+                {
+                    <span>Əsas kateqoriyadır</span>
+                }
+                else
+                {
+                    @Model.pa
+                }
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Yaradılma tarixi</label>
+            <div class="col-sm-10">
+                <input asp-for="CreatedAt" class="form-control" disabled>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">Dəyişiklik olunma tarixi</label>
+            <div class="col-sm-10">
+                <input asp-for="UpdatedAt" class="form-control" disabled>
+            </div>
+        </div>
+</div>
+ *@

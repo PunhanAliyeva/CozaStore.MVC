@@ -2,7 +2,7 @@ css_dir = "."
 sass_dir = "."
 images_dir = "."
 fonts_dir = "fonts"
-relative_assets = true
+relative_uploads = true
 
 output_style = :compact
 line_comments = false

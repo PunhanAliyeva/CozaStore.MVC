@@ -6,5 +6,6 @@ namespace CozaStore.MVC.Domain.Interfaces.IServices
     public interface ICategoryService:IService<Category>
     {
         Task CreateAsync(CategoryCreateDTO categoryCreateDTO);
+        //Task DetailAsync(CategoryGetDTO categoryGetDTO);
     }
 }

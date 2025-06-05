@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Category>
+@using CozaStore.MVC.Infrastructure.Extensions
 <div class="container">
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
@@ -9,7 +10,7 @@
                         <a asp-controller="category" asp-action="create" class="btn btn-warning">Yarat</a>
                     </p>
                     <div class="table-responsive">
-                        <table class="table">
+                        <table id="tree" class="table">
                             <thead>
                                 <tr>
                                     <th>Şəkil</th>
@@ -19,21 +20,37 @@
                                 </tr>
                             </thead>
                             <tbody>
-
-                                @foreach (var category in Model)
+                                @foreach (var parent in Model.Where(m => m.ParentId == null))
                                 {
-                                    <tr>
-                                        <td><img src="~/uploads/images/@category.ImageUrl" width="150" height="150" /></td>
-                                        <td>@category.Name</td>
-                                        <td>@category.Concept</td>
+                                    <tr class="treegrid-@parent.Id">
                                         <td>
-                                            <a asp-action="update" asp-route-id="@category.Id" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
-                                            <a asp-action="detail" asp-route-id="@category.Id" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></a>
-                                            <button class="btn btn-danger delete-category" data-id="@category.Id"><i class="fa-solid fa-trash"></i></button>
+                                            <img width="100" height="100" src="~/uploads/images/@parent.ImageUrl" />
+                                        </td>
+                                        <td>@parent.Name</td>
+                                        <td>@parent.Concept</td>
+                                        <td class="operation">
+                                            <a asp-action="update" asp-route-id="@parent.Id" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a asp-action="detail" asp-route-id="@parent.Id" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></a>
+                                            <button class="btn btn-danger delete-category" data-id="@parent.Id"><i class="fa-solid fa-trash"></i></button>
                                         </td>
                                     </tr>
+                                    foreach (var child in Model.GetHeirArchy(parent))
+                                    {
+                                        <tr class="treegrid-@child.Id treegrid-parent-@child.ParentId">
+                                            <td>
+                                                <img width="100" height="100" src="~/uploads/images/@child.ImageUrl" />
+                                            </td>
+                                            <td>@child.Name</td>
+                                            <td>@child.Concept</td>
+                                            <td class="operation">
+                                                <a asp-action="update" asp-route-id="@child.Id" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a asp-action="detail" asp-route-id="@child.Id" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></a>
+                                                <button class="btn btn-danger delete-category" data-id="@child.Id"><i class="fa-solid fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    }
                                 }
-                            </tbody>
+                            </tbody> 
                         </table>
                     </div>
                 </div>
@@ -41,6 +58,22 @@
         </div>
     </div>
 </div>
+
+@* tree-grid *@
+
+@section custom_js {
+    <script src="/lib/jquery-treegrid/js/jquery.treegrid.min.js"></script>
+    <script>
+        $('#tree').treegrid().treegrid('collapseAll');
+    </script>
+}
+
+@section custom_css {
+    <link rel="stylesheet" href="/lib/jquery-treegrid/css/jquery.treegrid.min.css" />
+}
+
+
+
 
 @section scripts {
     <script>

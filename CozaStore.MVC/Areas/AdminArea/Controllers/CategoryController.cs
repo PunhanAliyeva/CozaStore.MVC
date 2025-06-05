@@ -54,38 +54,18 @@ namespace CozaStore.MVC.AdminPanel.Controllers
             }
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id)
-        {
-            var category = await _categoryService.GetByIdAsync(id);
-            if (category == null) return NotFound();
-            await _categoryService.DeleteAsync(category);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Update(int id)
-        {
-            var category = await _categoryService.GetByIdAsync(id);
-            if (category == null) return NotFound();
-            return View(category);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(int id, Category category)
-        {
-            if (id != category.Id) return BadRequest();
-            if (!ModelState.IsValid) return View(category);
-            await _categoryService.UpdateAsync(category);
-            return RedirectToAction(nameof(Index));
-        }
-
-        public async Task<IActionResult> Detail(int id)
-        {
-            var category = await _categoryService.GetByIdAsync(id);
-            if (category == null) return NotFound();
-            return View(category);
-        }
+        //public async Task<IActionResult> Detail(int id)
+        //{
+        //    var category = await _categoryService.GetByIdAsync(id);
+        //    if (category == null) return NotFound();
+        //    CategoryGetDTO categoryGetDTO = new()
+        //    {
+        //        Name = category.Name,
+        //        Concept = category.Concept,
+        //        ImageUrl=category.ImageUrl,
+        //        ParentName=category.pa
+        //    };
+        //    return View(category);
+        //}
     }
 }

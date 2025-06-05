@@ -1,13 +1,12 @@
 ﻿
-using Microsoft.AspNetCore.Http;
-
 namespace CozaStore.MVC.Application.DTOs.CategoryDTOs
 {
-    public class CategoryCreateDTO
+    public class CategoryGetDTO
     {
         public string Name { get; set; }
         public string Concept { get; set; }
-        public IFormFile Photo { get; set; }
+        public string ImageUrl { get; set; }
         public int? ParentId { get; set; }
+        public string ParentName { get; set; }
     }
 }
