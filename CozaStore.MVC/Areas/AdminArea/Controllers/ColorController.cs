@@ -1,6 +1,5 @@
 ﻿using CozaStore.Domain.Interfaces.IServices;
 using CozaStore.MVC.Application.DTOs.ColorDTOs;
-using CozaStore.MVC.Application.DTOs.TagDTOs;
 using CozaStore.MVC.Application.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 

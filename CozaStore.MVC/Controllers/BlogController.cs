@@ -1,11 +1,10 @@
 ﻿using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
 using CozaStore.MVC.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CozaStore.MVC.Controllers
 {
-	public class BlogController : Controller
+    public class BlogController : Controller
 	{
 		private readonly IBlogService _blogService;
 		private readonly IProductService _productService;

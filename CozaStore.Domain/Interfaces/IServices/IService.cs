@@ -1,5 +1,4 @@
 ﻿using CozaStore.MVC.Domain.Commons;
-using CozaStore.MVC.Entities;
 
 namespace CozaStore.MVC.Domain.Interfaces.IServices
 {

@@ -1,10 +1,8 @@
 ﻿using CozaStore.MVC.Application.DTOs.BlogCategoryDTOs;
-using CozaStore.MVC.Application.DTOs.TagDTOs;
 using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
-using Microsoft.Identity.Client;
 
 namespace CozaStore.MVC.Persistence.Services
 {

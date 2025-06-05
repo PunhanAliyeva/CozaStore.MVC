@@ -5,7 +5,6 @@ using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
 using CozaStore.MVC.Infrastructure.Extensions;
 using CozaStore.MVC.Persistence.Helpers;
-using Microsoft.Identity.Client;
 
 namespace CozaStore.MVC.Persistence.Services
 {

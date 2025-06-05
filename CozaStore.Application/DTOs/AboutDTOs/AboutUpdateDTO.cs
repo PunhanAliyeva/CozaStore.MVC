@@ -1,6 +1,5 @@
 ﻿
 using Microsoft.AspNetCore.Http;
-using System.ComponentModel.DataAnnotations;
 
 namespace CozaStore.MVC.Application.DTOs.AboutDTOs
 {

@@ -1,14 +1,12 @@
 ﻿using CozaStore.MVC.Application.DTOs.BlogTagDTOs;
-using CozaStore.MVC.Application.DTOs.TagDTOs;
 using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Entities;
 using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
 
 namespace CozaStore.MVC.Persistence.Services
 {
-	public class BlogTagService : Service<BlogTag>, IBlogTagService
+    public class BlogTagService : Service<BlogTag>, IBlogTagService
 	{
 		private readonly IRepository<BlogTag> _repository;
 
@@ -27,7 +25,6 @@ namespace CozaStore.MVC.Persistence.Services
 			await _repository.AddAsync(blogTag);
 			await _repository.SaveAsync();
 		}
-
         public async Task DeleteAsync(int id)
         {
             var blogTag = await _repository.GetByIdAsync(id);

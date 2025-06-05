@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Size>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Ölçü cədvəli</h4>
+                    <p class="card-description">
+                        <a asp-controller="size" asp-action="create" class="btn btn-warning">Yarat</a>
+                    </p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Ad</th>
+                                    <th>Parametrlər</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var size in Model)
+                                {
+                                    <tr>
+                                        <td>@size.Name</td>
+                                        <td>
+                                            <a asp-action="update" asp-route-id="@size.Id" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>
+                                            <a asp-action="detail" asp-route-id="@size.Id" class="btn btn-primary"><i class="fa-solid fa-circle-info"></i></a>
+                                            <button class="btn btn-danger delete-size" data-id="@size.Id"><i class="fa-solid fa-trash"></i></button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $(".delete-size").click(function () {
+                var button = $(this);
+                var id = button.data("id");
+
+                Swal.fire({
+                    title: 'Silmək istədiyinizə əminsiniz?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Bəli, sil!',
+                    cancelButtonText: 'İmtina'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/AdminArea/Size/Delete/' + id,
+                            type: 'POST',
+                            success: function (response) {
+                                if (response.success) {
+                                    Swal.fire(
+                                        'Silindi!',
+                                        'Slayd uğurla silindi.',
+                                        'success'
+                                    ).then(() => {
+                                        location.reload(); // Səhifəni yenilə
+                                    });
+                                }
+                                else {
+                                    Swal.fire('Xəta!', response.message, 'error');
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+}

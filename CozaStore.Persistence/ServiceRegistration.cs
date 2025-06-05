@@ -38,6 +38,8 @@ namespace CozaStore.MVC.Persistence
 			services.AddScoped<ITagService,TagService>();
 			services.AddScoped<IColorRepository, ColorRepository>();
 			services.AddScoped<IColorService, ColorService>();
+            services.AddScoped<ISizeRepository, SizeRepository>();
+            services.AddScoped<ISizeService, SizeService>();
 		}
     }
 }

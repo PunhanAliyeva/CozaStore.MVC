@@ -5,13 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CozaStore.MVC.Persistence.Repositories
 {
-	public class AboutRepository : Repository<About>, IAboutRepository
-	{
-		private readonly AppDbContext _context;
+    public class AboutRepository : Repository<About>, IAboutRepository
+    {
+        public AboutRepository(AppDbContext context) : base(context)
+        {
 
-		public AboutRepository(AppDbContext context) : base(context)
-		{
-			_context = context;
-		}
-	}
+        }
+    }
 }

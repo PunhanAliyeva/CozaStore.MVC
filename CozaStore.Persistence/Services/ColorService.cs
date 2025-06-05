@@ -1,11 +1,9 @@
 ﻿
 using CozaStore.Domain.Interfaces.IServices;
 using CozaStore.MVC.Application.DTOs.ColorDTOs;
-using CozaStore.MVC.Application.DTOs.TagDTOs;
 using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Entities;
-using System.Diagnostics.Metrics;
 
 namespace CozaStore.MVC.Persistence.Services
 {
