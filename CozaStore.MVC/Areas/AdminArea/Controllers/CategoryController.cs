@@ -1,16 +1,12 @@
 ﻿using CozaStore.MVC.Application.DTOs.CategoryDTOs;
-using CozaStore.MVC.Application.DTOs.SliderDTOs;
 using CozaStore.MVC.Application.Exceptions;
 using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
-using CozaStore.MVC.Persistence.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel;
 
 namespace CozaStore.MVC.AdminPanel.Controllers
 {
-    [Area("AdminArea")]
+	[Area("AdminArea")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;

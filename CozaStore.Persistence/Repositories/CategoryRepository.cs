@@ -18,6 +18,7 @@ namespace CozaStore.MVC.Persistence.Repositories
 		{
 			return await _context.Categories
 				.Include(c=>c.Parent)
+			    .Where(c => c.DeletedAt == null)
 				.ToListAsync();
 		}
 
@@ -25,7 +26,7 @@ namespace CozaStore.MVC.Persistence.Repositories
 		{
 			return await _context.Categories
 				.Include(c => c.Parent)
-				.FirstOrDefaultAsync(c=>c.Id==id);
+				.FirstOrDefaultAsync(c=>c.Id==id && c.DeletedAt==null);
 		}
 	}
 }
