@@ -53,19 +53,31 @@ namespace CozaStore.MVC.AdminPanel.Controllers
                 return View(categoryCreateDTO);
             }
         }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                await _categoryService.DeleteAsync(id);
+                return Json(new {success=true});
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return Json(new { success = false, message=ex.Message });
+            }
+        }
 
-        //public async Task<IActionResult> Detail(int id)
-        //{
-        //    var category = await _categoryService.GetByIdAsync(id);
-        //    if (category == null) return NotFound();
-        //    CategoryGetDTO categoryGetDTO = new()
-        //    {
-        //        Name = category.Name,
-        //        Concept = category.Concept,
-        //        ImageUrl=category.ImageUrl,
-        //        ParentName=category.pa
-        //    };
-        //    return View(category);
-        //}
+        public async Task<IActionResult> Detail(int id)
+        {
+			try
+			{
+				var categoryDTO = await _categoryService.GetCategoriesWithIncludesAsync(id);
+                return View(categoryDTO);
+			}
+			catch (ArgumentException ex)
+			{
+				return NotFound(ex.Message);
+			}
+		}
     }
 }

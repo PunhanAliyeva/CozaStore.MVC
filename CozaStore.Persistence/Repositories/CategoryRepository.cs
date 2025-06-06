@@ -1,14 +1,31 @@
 ﻿using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Entities;
 using CozaStore.MVC.Persistence.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace CozaStore.MVC.Persistence.Repositories
 {
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {
-        public CategoryRepository(AppDbContext context) : base(context)
-        {
+		private readonly AppDbContext _context;
 
-        }
-    }
+		public CategoryRepository(AppDbContext context) : base(context)
+        {
+			_context = context;
+		}
+
+		public async Task<List<Category>> GetCategoriesWithIncludesAsync()
+		{
+			return await _context.Categories
+				.Include(c=>c.Parent)
+				.ToListAsync();
+		}
+
+		public async Task<Category> GetCategoriesWithIncludesAsync(int id)
+		{
+			return await _context.Categories
+				.Include(c => c.Parent)
+				.FirstOrDefaultAsync(c=>c.Id==id);
+		}
+	}
 }

@@ -1,4 +1,5 @@
-﻿@* @model Category
+﻿@using CozaStore.MVC.Application.DTOs.CategoryDTOs
+@model CategoryGetDTO
 
 <div class="card">
     <div class="card-header">
@@ -43,7 +44,7 @@
                 }
                 else
                 {
-                    @Model.pa
+                    @Model.ParentName
                 }
             </div>
         </div>
@@ -56,8 +57,7 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label">Dəyişiklik olunma tarixi</label>
             <div class="col-sm-10">
-                <input asp-for="UpdatedAt" class="form-control" disabled>
+                <input asp-for="ModifiedAt" class="form-control" disabled>
             </div>
         </div>
 </div>
- *@
