@@ -6,6 +6,7 @@ using CozaStore.MVC.Entities;
 using CozaStore.MVC.Persistence.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel;
 
 namespace CozaStore.MVC.AdminPanel.Controllers
 {
@@ -79,5 +80,47 @@ namespace CozaStore.MVC.AdminPanel.Controllers
 				return NotFound(ex.Message);
 			}
 		}
-    }
+		public async Task<IActionResult> Update(int id)
+		{
+			ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
+			var category = await _categoryService.GetByIdAsync(id);
+			if (category == null) return NotFound();
+			CategoryUpdateDTO categoryUpdateDTO = new() 
+            { 
+                Name = category.Name,
+                Concept = category.Concept, 
+                ImageUrl = category.ImageUrl,
+                ParentId=category.ParentId
+            };
+			return View(categoryUpdateDTO);
+		}
+
+		[HttpPost]
+		[AutoValidateAntiforgeryToken]
+		public async Task<IActionResult> Update(int id, CategoryUpdateDTO categoryUpdateDTO)
+		{
+			ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
+			if (id != categoryUpdateDTO.Id) return BadRequest();
+			if (!ModelState.IsValid) return View(categoryUpdateDTO);
+			try
+			{
+				await _categoryService.UpdateAsync(categoryUpdateDTO);
+				return RedirectToAction(nameof(Index));
+			}
+			catch (ArgumentException ex)
+			{
+				ModelState.AddModelError("Photo", ex.Message);
+				return View(categoryUpdateDTO);
+			}
+			catch (ValidationException ex)
+			{
+				ModelState.AddModelError(ex.PropertyName, ex.Message);
+				return View(categoryUpdateDTO);
+			}
+			catch (KeyNotFoundException ex)
+			{
+				return NotFound(ex.Message);
+			}
+		}
+	}
 }

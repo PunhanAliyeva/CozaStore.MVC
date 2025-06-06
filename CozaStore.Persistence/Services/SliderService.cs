@@ -42,8 +42,7 @@ namespace CozaStore.MVC.Persistence.Services
         public async Task UpdateAsync(SliderUpdateDTO sliderUpdateDTO)
         {
             var slider = await _repository.GetByIdAsync(sliderUpdateDTO.Id);
-            if (slider == null)
-                throw new KeyNotFoundException("Slayd tapılmadı");
+            if (slider == null) throw new KeyNotFoundException("Slayd tapılmadı");
 
             slider.Title = sliderUpdateDTO.Title;
             slider.SubTitle = sliderUpdateDTO.SubTitle;

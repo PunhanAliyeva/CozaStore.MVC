@@ -1,0 +1,45 @@
+﻿@using CozaStore.MVC.Application.DTOs.CategoryDTOs
+@model CategoryUpdateDTO
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Kateqoriyanın dəyişdirilməsi</h4>
+                    <p class="card-description">
+                        <a asp-action="index" class="btn btn-info">Geriyə qayıt</a>
+                    </p>
+                    <p>Köhnə şəkil</p>
+                    <form enctype="multipart/form-data" class="forms-sample" method="post">
+                        <input type="hidden" asp-for="ImageUrl" />
+                        <img width="160" height="120" src="~/uploads/images/@Model.ImageUrl" alt="" />
+                        <div class="form-group">
+                            <label asp-for="Name">Ad</label>
+                            <input asp-for="Name" class="form-control" placeholder="Ad daxil edin">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Concept">Mövzu</label>
+                            <input asp-for="Concept" class="form-control" placeholder="Mövzu daxil edin">
+                            <span asp-validation-for="Concept" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Photo">Şəkil</label>
+                            <input asp-for="Photo" class="form-control">
+                            <span asp-validation-for="Photo" style="color:red"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 col-form-label">Üst Kateqoriyalar</label>
+                            <div>
+                                <select asp-items="ViewBag.Categories" asp-for="ParentId" class="form-control" aria-label="Default select example">
+                                    <option selected disabled>--Seçin--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
