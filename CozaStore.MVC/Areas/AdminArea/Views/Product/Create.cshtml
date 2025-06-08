@@ -23,13 +23,14 @@
                             <input asp-for="Price" class="form-control" placeholder="Qiymət daxil edin">
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
-                        <p>Kateqoriya</p>
-                        <select asp-for="CategoryId" class="form-select" aria-label="Default select example">
-                            @foreach (var category in ViewBag.Categories)
-                            {
-                                <option value="@category.Id">@category.Name</option>
-                            }
-                        </select><br /><br />
+                        <div class="form-group">
+                            <label class="col-sm-4 col-form-label">Kateqoriya</label>
+                            <div>
+                                <select asp-items="ViewBag.Categories" asp-for="CategoryId" class="form-control" aria-label="Default select example">
+                                    <option selected disabled>--Seçin--</option>
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label asp-for="Photos">Şəkil</label>
                             <input asp-for="Photos" class="form-control">

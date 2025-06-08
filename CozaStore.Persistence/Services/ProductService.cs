@@ -3,6 +3,7 @@ using CozaStore.MVC.Domain.Interfaces.IRepositories;
 using CozaStore.MVC.Domain.Interfaces.IServices;
 using CozaStore.MVC.Entities;
 using CozaStore.MVC.Infrastructure.Extensions;
+using System.Collections.Immutable;
 
 namespace CozaStore.MVC.Persistence.Services
 {
@@ -17,6 +18,8 @@ namespace CozaStore.MVC.Persistence.Services
 
         public async Task CreateAsync(ProductCreateDTO productCreateDTO)
         {
+            if (productCreateDTO.Name is null) throw new ArgumentException("Məhsul adı əlavə et!");
+            
             var photos = productCreateDTO.Photos;
             if (photos.Length == 0)
                 throw new ArgumentException("Şəkil əlavə et!");

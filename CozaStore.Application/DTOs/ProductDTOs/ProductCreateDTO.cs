@@ -7,8 +7,8 @@ namespace CozaStore.MVC.Application.DTOs.ProductDTOs
 {
     public class ProductCreateDTO
     {
-        [Required,StringLength(30)]
-        public string Name { get; set; }
+		[Required, StringLength(30)]
+		public string Name { get; set; }
         public string? Description { get; set; }
         public double Price { get; set; }
         public bool IsFeatured { get; set; }
