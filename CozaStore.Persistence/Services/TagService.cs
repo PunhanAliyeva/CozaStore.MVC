@@ -1,10 +1,10 @@
-﻿using CozaStore.MVC.Application.DTOs.TagDTOs;
-using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Application.DTOs.TagDTOs;
+using CozaStore.Application.Exceptions;
+using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Domain.Interfaces.IServices;
 
-namespace CozaStore.MVC.Persistence.Services
+namespace CozaStore.Persistence.Services
 {
     public class TagService : Service<Tag>, ITagService
     {

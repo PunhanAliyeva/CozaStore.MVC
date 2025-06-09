@@ -1,8 +1,8 @@
-﻿using CozaStore.MVC.Domain.Commons;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Domain.Interfaces.IServices;
+﻿using CozaStore.Domain.Commons;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Domain.Interfaces.IServices;
 
-namespace CozaStore.MVC.Persistence.Services
+namespace CozaStore.Persistence.Services
 {
     public class Service<T> : IService<T> where T : BaseEntity
     {

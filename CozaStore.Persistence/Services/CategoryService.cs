@@ -1,16 +1,14 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Entities;
-using CozaStore.MVC.Application.DTOs.CategoryDTOs;
-using CozaStore.MVC.Infrastructure.Extensions;
-using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Persistence.Repositories;
-using CozaStore.MVC.Persistence.Helpers;
-using CozaStore.MVC.Application.DTOs.SliderDTOs;
+﻿using CozaStore.Application.DTOs.CategoryDTOs;
+using CozaStore.Application.Exceptions;
+using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Domain.Interfaces.IServices;
+using CozaStore.Persistence.Helpers;
+using CozaStore.Infrastructure.Extensions;
 
-namespace CozaStore.MVC.Persistence.Services
+namespace CozaStore.Persistence.Services
 {
-	public class CategoryService : Service<Category>, ICategoryService
+    public class CategoryService : Service<Category>, ICategoryService
 	{
 		private readonly IRepository<Category> _repository;
 		private readonly ICategoryRepository _categoryRepository;

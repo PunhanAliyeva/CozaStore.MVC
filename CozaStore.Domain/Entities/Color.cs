@@ -1,6 +1,6 @@
-﻿using CozaStore.MVC.Domain.Commons;
+﻿using CozaStore.Domain.Commons;
 
-namespace CozaStore.MVC.Entities
+namespace CozaStore.Domain.Entities
 {
     public class Color:BaseEntity
 	{

@@ -1,7 +1,7 @@
-﻿using CozaStore.MVC.Domain.Commons;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Domain.Commons;
+using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Domain.Entities
+namespace CozaStore.Domain.Entities
 {
 	public class BlogTag:BaseEntity
 	{

@@ -1,12 +1,12 @@
-﻿using CozaStore.MVC.Application.DTOs.SliderDTOs;
-using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
-using CozaStore.MVC.Infrastructure.Extensions;
-using CozaStore.MVC.Persistence.Helpers;
+﻿using CozaStore.Application.DTOs.SliderDTOs;
+using CozaStore.Application.Exceptions;
+using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Domain.Interfaces.IServices;
+using CozaStore.Persistence.Helpers;
+using CozaStore.Infrastructure.Extensions;
 
-namespace CozaStore.MVC.Persistence.Services
+namespace CozaStore.Persistence.Services
 {
     public class SliderService : Service<Slider>, ISliderService
     {

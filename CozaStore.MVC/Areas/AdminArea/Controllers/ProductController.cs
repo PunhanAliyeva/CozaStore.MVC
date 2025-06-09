@@ -1,6 +1,7 @@
-﻿using CozaStore.MVC.Application.DTOs.ProductDTOs;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Application.DTOs.ProductDTOs;
+using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IServices;
+using CozaStore.Persistence.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -46,33 +47,56 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
 		public async Task<IActionResult> Detail(int id)
 		{
-			var product=await _productService.GetByIdAsync(id);
-			if(product is null) return View(product);
-			return View(product);
-		}
-		public async Task<IActionResult> Update(int id)
-		{
-			var product = await _productService.GetByIdAsync(id);
-			if (product is null) return View(product);
-			return View(product);
-		}
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public  async Task<IActionResult> Update(int id,Product product)
-		{
-            if(id!=product.Id) return BadRequest();
-			if (!ModelState.IsValid) return View(product);
-			await _productService.UpdateAsync(product);
-			return RedirectToAction(nameof(Index));
-		}
-		[HttpPost]
-		[ValidateAntiForgeryToken]
-		public async Task<IActionResult> Delete(int id)
-		{
-			var product=await _productService.GetByIdAsync(id);
-			if(product is null) return NotFound();
-			await _productService.DeleteAsync(product);
-			return RedirectToAction(nameof(Index));
-		}
+			try
+			{
+                var product=await _productService.GetProductByIdWithIncludesAsync(id);
+				return View(product);
+            }
+			catch (KeyNotFoundException ex)
+			{
+				return NotFound(ex.Message);
+			}
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		//public async Task<IActionResult> Update(int id)
+		//{
+		//	var product = await _productService.GetByIdAsync(id);
+		//	if (product is null) return View(product);
+		//	return View(product);
+		//}
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+		//public  async Task<IActionResult> Update(int id,Product product)
+		//{
+  //          if(id!=product.Id) return BadRequest();
+		//	if (!ModelState.IsValid) return View(product);
+		//	await _productService.UpdateAsync(product);
+		//	return RedirectToAction(nameof(Index));
+		//}
+		//[HttpPost]
+		//[ValidateAntiForgeryToken]
+		//public async Task<IActionResult> Delete(int id)
+		//{
+		//	var product=await _productService.GetByIdAsync(id);
+		//	if(product is null) return NotFound();
+		//	await _productService.DeleteAsync(product);
+		//	return RedirectToAction(nameof(Index));
+		//}
 	}
 }

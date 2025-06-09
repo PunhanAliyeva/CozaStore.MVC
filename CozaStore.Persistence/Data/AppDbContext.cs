@@ -1,8 +1,7 @@
-﻿using CozaStore.MVC.Domain.Entities;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace CozaStore.MVC.Persistence.Data
+namespace CozaStore.Persistence.Data
 {
     public class AppDbContext:DbContext
     {

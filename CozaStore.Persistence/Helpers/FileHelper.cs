@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
 
-namespace CozaStore.MVC.Persistence.Helpers
+namespace CozaStore.Persistence.Helpers
 {
     public static class FileHelper
     {

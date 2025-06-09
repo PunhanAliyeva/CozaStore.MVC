@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace CozaStore.MVC.Application.DTOs.BlogTagDTOs
+namespace CozaStore.Application.DTOs.BlogTagDTOs
 {
 	public class BlogTagCreateDTO
 	{

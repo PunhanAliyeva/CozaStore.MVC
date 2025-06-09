@@ -1,5 +1,5 @@
 ﻿
-namespace CozaStore.MVC.Application.DTOs.CategoryDTOs
+namespace CozaStore.Application.DTOs.CategoryDTOs
 {
 	public class CategoryGetDTO
 	{

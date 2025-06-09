@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace CozaStore.MVC.Application.DTOs.TagDTOs
+namespace CozaStore.Application.DTOs.TagDTOs
 {
     public class TagCreateDTO
     {

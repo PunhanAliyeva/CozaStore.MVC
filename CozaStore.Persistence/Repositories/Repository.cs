@@ -1,10 +1,10 @@
-﻿using CozaStore.MVC.Domain.Commons;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Persistence.Data;
+﻿using CozaStore.Domain.Commons;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
-namespace CozaStore.MVC.Persistence.Repositories
+namespace CozaStore.Persistence.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {

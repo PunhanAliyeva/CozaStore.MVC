@@ -1,4 +1,4 @@
-﻿namespace CozaStore.MVC.Domain.Commons
+﻿namespace CozaStore.Domain.Commons
 {
     public class BaseEntity
     {

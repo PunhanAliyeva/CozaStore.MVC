@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace CozaStore.MVC.Application.DTOs.SliderDTOs
+namespace CozaStore.Application.DTOs.SliderDTOs
 {
     public class SliderUpdateDTO
     {

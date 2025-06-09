@@ -1,10 +1,10 @@
-﻿using CozaStore.MVC.Application.DTOs.BlogTagDTOs;
-using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Domain.Entities;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Domain.Interfaces.IServices;
+﻿using CozaStore.Application.DTOs.BlogTagDTOs;
+using CozaStore.Application.Exceptions;
+using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Domain.Interfaces.IServices;
 
-namespace CozaStore.MVC.Persistence.Services
+namespace CozaStore.Persistence.Services
 {
     public class BlogTagService : Service<BlogTag>, IBlogTagService
 	{

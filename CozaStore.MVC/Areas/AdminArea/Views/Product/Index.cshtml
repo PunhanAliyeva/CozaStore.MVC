@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Product>
+﻿@using CozaStore.Application.DTOs.ProductDTOs
+@model IEnumerable<ProductGetDTO>
 <div class="container">
     <div class="row">
         <div class="col-lg-12 grid-margin stretch-card">
@@ -26,7 +27,7 @@
                                     <tr>
                                         <td><img src="~/uploads/images/@product.MainImageUrl" width="150" height="150" /></td>
                                         <td>@product.Name</td>
-                                        <td>@product.Category.Name</td>
+                                        <td>@product.CategoryName</td>
                                         <td>@product.Price</td>
                                         <td>
                                             <a asp-action="update" asp-route-id="@product.Id" class="btn btn-success"><i class="fa-solid fa-pen-to-square"></i></a>

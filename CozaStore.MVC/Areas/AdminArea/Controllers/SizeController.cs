@@ -1,6 +1,6 @@
-﻿using CozaStore.MVC.Application.DTOs.SizeDTOs;
-using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Domain.Interfaces.IServices;
+﻿using CozaStore.Application.DTOs.SizeDTOs;
+using CozaStore.Application.Exceptions;
+using CozaStore.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CozaStore.MVC.Areas.AdminArea.Controllers

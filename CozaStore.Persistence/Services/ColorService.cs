@@ -1,11 +1,11 @@
 ﻿
+using CozaStore.Application.DTOs.ColorDTOs;
+using CozaStore.Application.Exceptions;
+using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
 using CozaStore.Domain.Interfaces.IServices;
-using CozaStore.MVC.Application.DTOs.ColorDTOs;
-using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Entities;
 
-namespace CozaStore.MVC.Persistence.Services
+namespace CozaStore.Persistence.Services
 {
     public class ColorService : Service<Color>, IColorService
     {

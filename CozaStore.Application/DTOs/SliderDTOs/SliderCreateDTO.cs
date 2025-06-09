@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace CozaStore.MVC.Application.DTOs.SliderDTOs
+namespace CozaStore.Application.DTOs.SliderDTOs
 {
 	public class SliderCreateDTO
 	{

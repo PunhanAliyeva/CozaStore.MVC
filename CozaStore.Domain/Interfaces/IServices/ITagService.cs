@@ -1,7 +1,7 @@
-﻿using CozaStore.MVC.Application.DTOs.TagDTOs;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Application.DTOs.TagDTOs;
+using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Domain.Interfaces.IServices
+namespace CozaStore.Domain.Interfaces.IServices
 {
     public interface ITagService:IService<Tag>
     {

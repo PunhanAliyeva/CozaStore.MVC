@@ -1,11 +1,11 @@
 ﻿
-using CozaStore.MVC.Application.DTOs.SizeDTOs;
-using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
+using CozaStore.Application.DTOs.SizeDTOs;
+using CozaStore.Application.Exceptions;
+using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Domain.Interfaces.IServices;
 
-namespace CozaStore.MVC.Persistence.Services
+namespace CozaStore.Persistence.Services
 {
     public class SizeService : Service<Size>, ISizeService
     {

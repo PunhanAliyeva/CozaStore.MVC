@@ -1,8 +1,8 @@
 ﻿
 
-using CozaStore.MVC.Entities;
+using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Infrastructure.Extensions
+namespace CozaStore.Infrastructure.Extensions
 {
     public static class CategoryExtension
     {

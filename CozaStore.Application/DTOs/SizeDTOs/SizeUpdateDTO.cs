@@ -1,4 +1,4 @@
-﻿namespace CozaStore.MVC.Application.DTOs.SizeDTOs
+﻿namespace CozaStore.Application.DTOs.SizeDTOs
 {
     public class SizeUpdateDTO
     {

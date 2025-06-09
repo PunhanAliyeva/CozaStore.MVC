@@ -1,9 +1,9 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Entities;
-using CozaStore.MVC.Persistence.Data;
+﻿using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace CozaStore.MVC.Persistence.Repositories
+namespace CozaStore.Persistence.Repositories
 {
     public class CategoryRepository : Repository<Category>, ICategoryRepository
     {

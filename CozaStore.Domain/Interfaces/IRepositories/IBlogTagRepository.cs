@@ -1,6 +1,6 @@
-﻿using CozaStore.MVC.Domain.Entities;
+﻿using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Domain.Interfaces.IRepositories
+namespace CozaStore.Domain.Interfaces.IRepositories
 {
 	public interface IBlogTagRepository:IRepository<BlogTag>
 	{

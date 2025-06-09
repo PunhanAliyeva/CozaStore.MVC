@@ -1,5 +1,4 @@
-using CozaStore.MVC.Persistence;
-
+using CozaStore.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 var config = builder.Configuration;
 // Add services to the container.

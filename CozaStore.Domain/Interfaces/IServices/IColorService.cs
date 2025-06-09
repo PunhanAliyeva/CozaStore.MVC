@@ -1,7 +1,7 @@
 ﻿
-using CozaStore.MVC.Application.DTOs.ColorDTOs;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
+using CozaStore.Domain.Interfaces.IServices;
+using CozaStore.Domain.Entities;
+using CozaStore.Application.DTOs.ColorDTOs;
 
 namespace CozaStore.Domain.Interfaces.IServices
 {

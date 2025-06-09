@@ -1,9 +1,9 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Entities;
-using CozaStore.MVC.Persistence.Data;
+﻿using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Persistence.Data;
 using Microsoft.EntityFrameworkCore;
 
-namespace CozaStore.MVC.Persistence.Repositories
+namespace CozaStore.Persistence.Repositories
 {
 	public class ProductRepository : Repository<Product>, IProductRepository
 	{
@@ -18,6 +18,7 @@ namespace CozaStore.MVC.Persistence.Repositories
 		{
 			return await _context.Products
 				.Where(p=>p.IsFeatured)
+				.Include(p=>p.Category)
 				.Include(p => p.ProductImages)
 				.Take(takeCount)
 				.ToListAsync();
@@ -30,5 +31,13 @@ namespace CozaStore.MVC.Persistence.Repositories
 				.Include(p=>p.ProductImages)
 				.ToListAsync();
 		}
-	}
+
+        public async Task<Product> GetProductByIdWithIncludesAsync(int id)
+        {
+			return await _context.Products
+				.Include(p => p.Category)
+				.Include(p=>p.ProductImages)
+				.FirstOrDefaultAsync(p=>p.Id== id);	
+        }
+    }
 }

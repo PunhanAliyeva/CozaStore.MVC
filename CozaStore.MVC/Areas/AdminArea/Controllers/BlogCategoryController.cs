@@ -1,6 +1,6 @@
-﻿using CozaStore.MVC.Application.DTOs.BlogCategoryDTOs;
-using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Domain.Interfaces.IServices;
+﻿using CozaStore.Application.DTOs.BlogCategoryDTOs;
+using CozaStore.Application.Exceptions;
+using CozaStore.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CozaStore.MVC.Areas.AdminArea.Controllers

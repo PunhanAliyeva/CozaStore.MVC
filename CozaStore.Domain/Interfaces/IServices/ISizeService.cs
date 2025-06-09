@@ -1,9 +1,9 @@
 ﻿
 
-using CozaStore.MVC.Application.DTOs.SizeDTOs;
-using CozaStore.MVC.Entities;
+using CozaStore.Application.DTOs.SizeDTOs;
+using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Domain.Interfaces.IServices
+namespace CozaStore.Domain.Interfaces.IServices
 {
     public interface ISizeService:IService<Size>
     {

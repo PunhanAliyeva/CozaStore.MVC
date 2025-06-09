@@ -1,7 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Http;
 
-namespace CozaStore.MVC.Application.DTOs.AboutDTOs
+namespace CozaStore.Application.DTOs.AboutDTOs
 {
     public class AboutUpdateDTO
     {

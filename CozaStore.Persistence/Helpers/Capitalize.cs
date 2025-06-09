@@ -1,4 +1,4 @@
-﻿namespace CozaStore.MVC.Persistence.Helpers
+﻿namespace CozaStore.Persistence.Helpers
 {
     //public static class Capitalize
     //{

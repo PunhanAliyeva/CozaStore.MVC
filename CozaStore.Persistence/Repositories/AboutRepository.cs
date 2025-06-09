@@ -1,9 +1,8 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Entities;
-using CozaStore.MVC.Persistence.Data;
-using Microsoft.EntityFrameworkCore;
+﻿using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Persistence.Data;
 
-namespace CozaStore.MVC.Persistence.Repositories
+namespace CozaStore.Persistence.Repositories
 {
     public class AboutRepository : Repository<About>, IAboutRepository
     {

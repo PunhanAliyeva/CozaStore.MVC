@@ -1,25 +1,25 @@
-﻿using CozaStore.MVC.Application.DTOs.ProductDTOs;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
-using CozaStore.MVC.Infrastructure.Extensions;
-using System.Collections.Immutable;
+﻿using CozaStore.Application.DTOs.ProductDTOs;
+using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Domain.Interfaces.IServices;
+using CozaStore.Infrastructure.Extensions;
+using CozaStore.Persistence.Repositories;
 
-namespace CozaStore.MVC.Persistence.Services
+namespace CozaStore.Persistence.Services
 {
-	public class ProductService : Service<Product>, IProductService
-	{
-		private readonly IProductRepository _repository;
+    public class ProductService : Service<Product>, IProductService
+    {
+        private readonly IProductRepository _repository;
 
-		public ProductService(IProductRepository repository) : base(repository)
-		{
-			_repository = repository;
-		}
+        public ProductService(IProductRepository repository) : base(repository)
+        {
+            _repository = repository;
+        }
 
         public async Task CreateAsync(ProductCreateDTO productCreateDTO)
         {
             if (productCreateDTO.Name is null) throw new ArgumentException("Məhsul adı əlavə et!");
-            
+
             var photos = productCreateDTO.Photos;
             if (photos.Length == 0)
                 throw new ArgumentException("Şəkil əlavə et!");
@@ -35,7 +35,7 @@ namespace CozaStore.MVC.Persistence.Services
                     throw new ArgumentException("Şəklin ölçüsü 2MB-dan çox olmamalıdır!");
                 }
                 ProductImage productImage = new();
-                productImage.ImageUrl = photo.SaveFile("uploads","images");
+                productImage.ImageUrl = photo.SaveFile("uploads", "images");
                 productImage.ProductId = newProduct.Id;
                 if (photos[0] == photo)
                 {
@@ -50,14 +50,53 @@ namespace CozaStore.MVC.Persistence.Services
             await _repository.SaveAsync();
         }
 
-        public async Task<List<Product>> GetFeaturedProductsAsync(int takeCount)
-		{
-			return await _repository.GetFeaturedProductsAsync(takeCount);
-		}
+        public async Task<List<ProductGetDTO>> GetFeaturedProductsAsync(int takeCount)
+        {
+            var products = await _repository.GetFeaturedProductsAsync(takeCount);
+            return products.Select(p => new ProductGetDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description=p.Description,
+                Price = p.Price,
+                CategoryName = p.Category.Name,
+                ImageUrls = p.ProductImages?.Select(i => i.ImageUrl).ToList() ?? new List<string>()
+            }).ToList();
+        }
 
-		public async Task<List<Product>> GetProductsWithIncludesAsync()
-		{
-			return await _repository.GetProductsWithIncludesAsync();
-		}
-	}
+        public async Task<List<ProductGetDTO>> GetProductsWithIncludesAsync()
+        {
+            var products= await _repository.GetProductsWithIncludesAsync();
+            var dtoList = products.Select(p => new ProductGetDTO
+            {
+                Id = p.Id,
+                Name = p.Name,
+                Description=p.Description,
+                Price = p.Price,
+                CategoryName = p.Category?.Name,
+                ImageUrls = p.ProductImages?.Select(i => i.ImageUrl).ToList() ?? new List<string>(),
+                CreatedAt=p.CreatedAt,
+                ModifiedAt=p.UpdatedAt
+            }).ToList();
+            return dtoList;
+        }
+
+        public async Task<ProductGetDTO> GetProductByIdWithIncludesAsync(int id)
+        {
+            var product = await _repository.GetProductByIdWithIncludesAsync(id);
+            if (product == null) throw new KeyNotFoundException("Məhsul mövcud deyil!");
+            var dto = new ProductGetDTO
+            {
+                Id = id,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                CategoryName = product.Category.Name,
+                ImageUrls = product.ProductImages?.Select(i => i.ImageUrl).ToList() ?? new List<string>(),
+                CreatedAt = product.CreatedAt,
+                ModifiedAt = product.UpdatedAt
+            };
+            return dto;
+        }
+    }
 }

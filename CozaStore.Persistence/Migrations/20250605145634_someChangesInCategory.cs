@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace CozaStore.MVC.Persistence.Migrations
+namespace CozaStore.Persistence.Migrations
 {
     /// <inheritdoc />
     public partial class someChangesInCategory : Migration

@@ -1,7 +1,7 @@
-﻿using CozaStore.MVC.Domain.Commons;
+﻿using CozaStore.Domain.Commons;
 using System.Linq.Expressions;
 
-namespace CozaStore.MVC.Domain.Interfaces.IRepositories
+namespace CozaStore.Domain.Interfaces.IRepositories
 {
     public interface IRepository<T> where T : BaseEntity
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace CozaStore.MVC.Application.DTOs.TagDTOs
+namespace CozaStore.Application.DTOs.TagDTOs
 {
     public class TagUpdateDTO
     {

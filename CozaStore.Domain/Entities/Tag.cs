@@ -1,8 +1,8 @@
 ﻿
-using CozaStore.MVC.Domain.Commons;
-using CozaStore.MVC.Domain.Entities;
+using CozaStore.Domain.Commons;
+using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Entities
+namespace CozaStore.Domain.Entities
 {
 	public class Tag:BaseEntity
 	{

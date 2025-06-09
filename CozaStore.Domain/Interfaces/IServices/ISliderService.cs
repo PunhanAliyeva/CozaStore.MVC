@@ -1,7 +1,7 @@
-﻿using CozaStore.MVC.Application.DTOs.SliderDTOs;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Application.DTOs.SliderDTOs;
+using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Domain.Interfaces.IServices
+namespace CozaStore.Domain.Interfaces.IServices
 {
     public interface ISliderService:IService<Slider>
     {

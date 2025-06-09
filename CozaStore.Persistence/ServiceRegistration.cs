@@ -1,14 +1,13 @@
-﻿using CozaStore.Domain.Interfaces.IServices;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Persistence.Data;
-using CozaStore.MVC.Persistence.Repositories;
-using CozaStore.MVC.Persistence.Services;
+﻿using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Domain.Interfaces.IServices;
+using CozaStore.Persistence.Data;
+using CozaStore.Persistence.Repositories;
+using CozaStore.Persistence.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CozaStore.MVC.Persistence
+namespace CozaStore.Persistence
 {
     public static class ServiceRegistration
     {

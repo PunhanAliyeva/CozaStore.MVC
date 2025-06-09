@@ -1,7 +1,7 @@
-﻿using CozaStore.MVC.Application.DTOs.BlogTagDTOs;
-using CozaStore.MVC.Domain.Entities;
+﻿using CozaStore.Application.DTOs.BlogTagDTOs;
+using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Domain.Interfaces.IServices
+namespace CozaStore.Domain.Interfaces.IServices
 {
 	public interface IBlogTagService:IService<BlogTag>
 	{

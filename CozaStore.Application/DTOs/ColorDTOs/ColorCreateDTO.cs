@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace CozaStore.MVC.Application.DTOs.ColorDTOs
+namespace CozaStore.Application.DTOs.ColorDTOs
 {
     public class ColorCreateDTO
     {

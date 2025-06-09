@@ -1,10 +1,11 @@
-﻿using CozaStore.MVC.Application.DTOs.BlogCategoryDTOs;
-using CozaStore.MVC.Application.Exceptions;
-using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Domain.Interfaces.IServices;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Application.DTOs.BlogCategoryDTOs;
+using CozaStore.Application.Exceptions;
+using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Domain.Interfaces.IServices;
 
-namespace CozaStore.MVC.Persistence.Services
+
+namespace CozaStore.Persistence.Services
 {
 	public class BlogCategoryService : Service<BlogCategory>, IBlogCategoryService
 	{

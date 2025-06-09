@@ -1,4 +1,4 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IServices;
+﻿using CozaStore.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CozaStore.MVC.Controllers

@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace CozaStore.MVC.Infrastructure.Extensions
+namespace CozaStore.Infrastructure.Extensions
 {
 	public static class FileExtension
 	{

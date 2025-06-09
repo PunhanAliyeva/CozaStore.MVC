@@ -1,8 +1,7 @@
 ﻿
 
-using CozaStore.MVC.Entities;
-
-namespace CozaStore.MVC.Domain.Interfaces.IRepositories
+using CozaStore.Domain.Entities;
+namespace CozaStore.Domain.Interfaces.IRepositories
 {
     public interface ISizeRepository:IRepository<Size>
     {

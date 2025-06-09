@@ -1,6 +1,6 @@
-﻿using CozaStore.MVC.Domain.Commons;
+﻿using CozaStore.Domain.Commons;
 
-namespace CozaStore.MVC.Domain.Interfaces.IServices
+namespace CozaStore.Domain.Interfaces.IServices
 {
     public interface IService<T> where T:BaseEntity
     {

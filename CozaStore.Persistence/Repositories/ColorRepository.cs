@@ -1,9 +1,9 @@
-﻿using CozaStore.MVC.Domain.Interfaces.IRepositories;
-using CozaStore.MVC.Entities;
-using CozaStore.MVC.Persistence.Data;
+﻿using CozaStore.Domain.Entities;
+using CozaStore.Domain.Interfaces.IRepositories;
+using CozaStore.Persistence.Data;
 
 
-namespace CozaStore.MVC.Persistence.Repositories
+namespace CozaStore.Persistence.Repositories
 {
     public class ColorRepository : Repository<Color>, IColorRepository
     {

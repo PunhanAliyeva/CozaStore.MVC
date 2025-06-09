@@ -1,12 +1,13 @@
-﻿using CozaStore.MVC.Application.DTOs.ProductDTOs;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Domain.Entities;
+using CozaStore.Application.DTOs.ProductDTOs;
 
-namespace CozaStore.MVC.Domain.Interfaces.IServices
+namespace CozaStore.Domain.Interfaces.IServices
 {
 	public interface IProductService : IService<Product>
 	{
-		Task<List<Product>> GetProductsWithIncludesAsync();
-		Task<List<Product>> GetFeaturedProductsAsync(int takeCount);
+		Task<List<ProductGetDTO>> GetProductsWithIncludesAsync();
+        Task<ProductGetDTO> GetProductByIdWithIncludesAsync(int id);
+        Task<List<ProductGetDTO>> GetFeaturedProductsAsync(int takeCount);
 		Task CreateAsync(ProductCreateDTO productCreateDTO);
-	}
+    }
 }

@@ -1,6 +1,6 @@
 ﻿
 
-namespace CozaStore.MVC.Application.Exceptions
+namespace CozaStore.Application.Exceptions
 {
     public class ValidationException:Exception
     {

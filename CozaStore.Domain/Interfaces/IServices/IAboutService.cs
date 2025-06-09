@@ -1,7 +1,7 @@
-﻿using CozaStore.MVC.Application.DTOs.AboutDTOs;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Application.DTOs.AboutDTOs;
+using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Domain.Interfaces.IServices
+namespace CozaStore.Domain.Interfaces.IServices
 {
 	public interface IAboutService:IService<About>
 	{

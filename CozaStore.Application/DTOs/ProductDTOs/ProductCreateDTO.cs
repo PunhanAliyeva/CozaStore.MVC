@@ -3,7 +3,7 @@
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace CozaStore.MVC.Application.DTOs.ProductDTOs
+namespace CozaStore.Application.DTOs.ProductDTOs
 {
     public class ProductCreateDTO
     {

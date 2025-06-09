@@ -1,8 +1,8 @@
 ﻿
 
-using CozaStore.MVC.Entities;
+using CozaStore.Domain.Entities;
 
-namespace CozaStore.MVC.Domain.Interfaces.IRepositories
+namespace CozaStore.Domain.Interfaces.IRepositories
 {
     public interface IColorRepository:IRepository<Color>
     {

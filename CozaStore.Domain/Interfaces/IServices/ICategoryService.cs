@@ -1,7 +1,7 @@
-﻿using CozaStore.MVC.Application.DTOs.CategoryDTOs;
-using CozaStore.MVC.Entities;
+﻿using CozaStore.Domain.Entities;
+using CozaStore.Application.DTOs.CategoryDTOs;
 
-namespace CozaStore.MVC.Domain.Interfaces.IServices
+namespace CozaStore.Domain.Interfaces.IServices
 {
     public interface ICategoryService:IService<Category>
     {

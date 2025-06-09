@@ -1,0 +1,65 @@
+﻿@using CozaStore.Application.DTOs.ProductDTOs
+@model ProductGetDTO
+
+<div class="card">
+    <div class="card-header">
+        <h5>
+            Məhsul haqqında
+        </h5>
+        <br>
+        <a asp-controller="product" asp-action="Index" class="btn btn-success mt-3 mb-5">Geriyə Qayıt</a>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Ad</label>
+        <div class="col-sm-10">
+            <input asp-for="Name" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Açıqlama</label>
+        <div class="col-sm-10">
+            <input asp-for="Description" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Qiymət</label>
+        <div class="col-sm-10">
+            <input asp-for="Price" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Kateqoriya</label>
+        <div class="col-sm-10">
+            <input asp-for="CategoryName" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Şəkillər</label>
+        <div class="col-sm-10">
+            @if (Model.ImageUrls != null)
+            {
+                @foreach (var image in Model.ImageUrls)
+                {
+                    <img src="~/uploads/images/@image" width="120" style="margin: 5px;" />
+                }
+            }
+            else
+            {
+                <p>Şəkil tapılmadı</p>
+            }
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Yaradılma tarixi</label>
+        <div class="col-sm-10">
+            <input asp-for="CreatedAt" class="form-control" disabled>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-2 col-form-label">Dəyişiklik olunma tarixi</label>
+        <div class="col-sm-10">
+            <input asp-for="ModifiedAt" class="form-control" disabled>
+        </div>
+    </div>
+</div>

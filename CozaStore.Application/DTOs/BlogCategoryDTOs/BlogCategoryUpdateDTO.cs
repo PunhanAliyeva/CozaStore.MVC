@@ -1,4 +1,4 @@
-﻿namespace CozaStore.MVC.Application.DTOs.BlogCategoryDTOs
+﻿namespace CozaStore.Application.DTOs.BlogCategoryDTOs
 {
     public class BlogCategoryUpdateDTO
     {

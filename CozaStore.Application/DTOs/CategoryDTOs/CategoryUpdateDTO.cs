@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace CozaStore.MVC.Application.DTOs.CategoryDTOs
+namespace CozaStore.Application.DTOs.CategoryDTOs
 {
     public class CategoryUpdateDTO
     {

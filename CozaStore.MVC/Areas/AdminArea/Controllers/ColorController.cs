@@ -1,6 +1,6 @@
 ﻿using CozaStore.Domain.Interfaces.IServices;
-using CozaStore.MVC.Application.DTOs.ColorDTOs;
-using CozaStore.MVC.Application.Exceptions;
+using CozaStore.Application.DTOs.ColorDTOs;
+using CozaStore.Application.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CozaStore.MVC.Areas.AdminArea.Controllers
