@@ -48,7 +48,7 @@
 @section scripts {
     <script>
         $(document).ready(function () {
-            $(".delete-slider").click(function () {
+            $(".delete-product").click(function () {
                 var button = $(this);
                 var id = button.data("id");
 
@@ -63,13 +63,13 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         $.ajax({
-                            url: '/AdminArea/Slider/Delete/' + id,
+                            url: '/AdminArea/Product/Delete/' + id,
                             type: 'POST',
                             success: function (response) {
                                 if (response.success) {
                                     Swal.fire(
                                         'Silindi!',
-                                        'Slayd uğurla silindi.',
+                                        'Məhsul uğurla silindi.',
                                         'success'
                                     ).then(() => {
                                         location.reload(); // Səhifəni yenilə
@@ -84,45 +84,5 @@
                 });
             });
         });
-        // $(document).ready(function () {
-        //     $(".delete-slider").click(function () {
-        //         var button = $(this);
-        //         var id = button.data("id");
-
-        //         Swal.fire({
-        //             title: 'Əminsən?',
-        //             text: "Bu slayd silinəcək!",
-        //             icon: 'warning',
-        //             showCancelButton: true,
-        //             confirmButtonColor: '#3085d6',
-        //             cancelButtonColor: '#d33',
-        //             confirmButtonText: 'Bəli, sil!',
-        //             cancelButtonText: 'İmtina'
-        //         }).then((result) => {
-        //             if (result.isConfirmed) {
-        //                 $.ajax({
-        //                     url: '/AdminArea/Slider/Delete/' + id,
-        //                     type: 'POST',
-        //                     success: function (response) {
-        //                         if (response.success) {
-        //                             Swal.fire(
-        //                                 'Silindi!',
-        //                                 'Slayd uğurla silindi.',
-        //                                 'success'
-        //                             ).then(() => {
-        //                                 button.closest("tr").remove(); // UI-dan sil
-        //                             });
-        //                         } else {
-        //                             Swal.fire('Xəta!', response.message, 'error');
-        //                         }
-        //                     },
-        //                     error: function () {
-        //                         Swal.fire('Xəta!', 'Server cavab vermədi.', 'error');
-        //                     }
-        //                 });
-        //             }
-        //         });
-        //     });
-        // });
     </script>
 }

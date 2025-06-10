@@ -3,6 +3,7 @@ using CozaStore.Domain.Entities;
 using CozaStore.Domain.Interfaces.IRepositories;
 using CozaStore.Domain.Interfaces.IServices;
 using CozaStore.Infrastructure.Extensions;
+using CozaStore.Persistence.Helpers;
 using CozaStore.Persistence.Repositories;
 
 namespace CozaStore.Persistence.Services
@@ -19,7 +20,6 @@ namespace CozaStore.Persistence.Services
         public async Task CreateAsync(ProductCreateDTO productCreateDTO)
         {
             if (productCreateDTO.Name is null) throw new ArgumentException("Məhsul adı əlavə et!");
-
             var photos = productCreateDTO.Photos;
             if (photos.Length == 0)
                 throw new ArgumentException("Şəkil əlavə et!");
@@ -45,6 +45,7 @@ namespace CozaStore.Persistence.Services
             }
             newProduct.Name = productCreateDTO.Name;
             newProduct.Price = productCreateDTO.Price;
+            newProduct.Description = productCreateDTO.Description;
             newProduct.CategoryId = productCreateDTO.CategoryId;
             await _repository.AddAsync(newProduct);
             await _repository.SaveAsync();
@@ -97,6 +98,52 @@ namespace CozaStore.Persistence.Services
                 ModifiedAt = product.UpdatedAt
             };
             return dto;
+        }
+
+        public async Task DeleteAsync(int id)
+        {
+            var product =await  _repository.GetProductByIdWithIncludesAsync(id);
+            if (product is null) throw new KeyNotFoundException("Məhsul tapılmadı!");
+            _repository.Delete(product);
+            foreach (var image in product.ProductImages)
+            {
+                FileHelper.DeleteFile("uploads","images", image.ImageUrl);
+            }
+            await _repository.SaveAsync();
+        }
+
+        public async Task UpdateAsync(ProductUpdateDTO productUpdateDTO)
+        {
+            var product =await _repository.GetProductByIdWithIncludesAsync(productUpdateDTO.Id);
+            if (product is null) throw new KeyNotFoundException("Məhsul tapılmadı!");
+            var dto = new ProductUpdateDTO()
+            {
+                Id= product.Id,
+                Name=product.Name,
+                Price= product.Price,
+                Description=product.Description,
+                CategoryId=product.Category.Id
+            };
+            if (dto.Photos != null)
+            {
+                foreach (var photo in dto.Photos)
+                {
+                    if (!photo.CheckImage())
+                    {
+                        throw new ArgumentException("Yalniz şəkil göndərilə bilər!");
+                    }
+                    if (photo.CheckImageSize(2000))
+                    {
+                        throw new ArgumentException("Şəklin ölçüsü 2MB-dan çox olmamalıdır!");
+                    }
+                    string fileName = photo.SaveFile("uploads","images"); 
+                    product.ProductImages.Add(new ProductImage
+                    {
+                        ImageUrl = fileName,
+                        IsMain = false 
+                    });
+                }
+            }
         }
     }
 }

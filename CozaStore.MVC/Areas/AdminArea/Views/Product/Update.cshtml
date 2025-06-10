@@ -1,0 +1,55 @@
+﻿@using CozaStore.Application.DTOs.ProductDTOs
+@model ProductUpdateDTO
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 grid-margin stretch-card">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Məhsulun dəyişdirilməsi</h4>
+
+                    <form method="post" enctype="multipart/form-data" class="forms-sample">
+                        <div class="form-group">
+                            <label asp-for="Name">Ad</label>
+                            <input asp-for="Name" class="form-control" placeholder="Ad daxil edin">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Description">Açıqlama</label>
+                            <input asp-for="Description" class="form-control" placeholder="Açıqlama daxil edin">
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Price">Qiymət</label>
+                            <input asp-for="Price" class="form-control" placeholder="Qiymət daxil edin">
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-4 col-form-label">Kateqoriya</label>
+                            <div>
+                                <select asp-items="ViewBag.Categories" asp-for="CategoryId" class="form-control" aria-label="Default select example">
+                                    <option selected disabled>--Seçin--</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <span>Köhnə şəkillər</span>
+                            @foreach (var image in Model.ProductImages)
+                            {
+                                <img src="~/uploads/images/@image.ImageUrl" width="120" height="120" style="margin:5px;"/>
+                            }
+
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Photos">Şəkil</label>
+                            <input asp-for="Photos" class="form-control">
+                            <span asp-validation-for="Photos" class="text-danger"></span>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary mr-2">Yadda saxla</button>
+                        <a asp-action="index" class="btn btn-warning">Ləğv et</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

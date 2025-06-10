@@ -9,5 +9,7 @@ namespace CozaStore.Domain.Interfaces.IServices
         Task<ProductGetDTO> GetProductByIdWithIncludesAsync(int id);
         Task<List<ProductGetDTO>> GetFeaturedProductsAsync(int takeCount);
 		Task CreateAsync(ProductCreateDTO productCreateDTO);
+		Task UpdateAsync(ProductUpdateDTO productUpdateDTO);
+		Task DeleteAsync(int id);
     }
 }
