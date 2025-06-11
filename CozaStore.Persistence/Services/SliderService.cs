@@ -19,7 +19,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task CreateAsync(SliderCreateDTO sliderCreateDTO)
         {
-            if (await _repository.AnyAsync(s => s.Title.Trim().ToLower() == sliderCreateDTO.Title.Trim().ToLower()))
+            if (await _repository.AnyAsync(s => s.Title.Trim().ToLower() == sliderCreateDTO.Title.Trim().ToLower() && s.DeletedAt == null))
                 throw new ValidationException("Title", "Bu başlıqda slayd artıq mövcuddur!");
 
             if (sliderCreateDTO.Photo == null || sliderCreateDTO.Photo.Length == 0)

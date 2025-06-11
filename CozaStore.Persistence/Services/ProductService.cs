@@ -1,4 +1,5 @@
-﻿using CozaStore.Application.DTOs.ProductDTOs;
+﻿using CozaStore.Application.DTOs;
+using CozaStore.Application.DTOs.ProductDTOs;
 using CozaStore.Domain.Entities;
 using CozaStore.Domain.Interfaces.IRepositories;
 using CozaStore.Domain.Interfaces.IServices;
@@ -82,22 +83,11 @@ namespace CozaStore.Persistence.Services
             return dtoList;
         }
 
-        public async Task<ProductGetDTO> GetProductByIdWithIncludesAsync(int id)
+        public async Task<Product> GetProductByIdWithIncludesAsync(int id)
         {
             var product = await _repository.GetProductByIdWithIncludesAsync(id);
             if (product == null) throw new KeyNotFoundException("Məhsul mövcud deyil!");
-            var dto = new ProductGetDTO
-            {
-                Id = id,
-                Name = product.Name,
-                Description = product.Description,
-                Price = product.Price,
-                CategoryName = product.Category.Name,
-                ImageUrls = product.ProductImages?.Select(i => i.ImageUrl).ToList() ?? new List<string>(),
-                CreatedAt = product.CreatedAt,
-                ModifiedAt = product.UpdatedAt
-            };
-            return dto;
+            return product;
         }
 
         public async Task DeleteAsync(int id)
@@ -116,17 +106,9 @@ namespace CozaStore.Persistence.Services
         {
             var product =await _repository.GetProductByIdWithIncludesAsync(productUpdateDTO.Id);
             if (product is null) throw new KeyNotFoundException("Məhsul tapılmadı!");
-            var dto = new ProductUpdateDTO()
+            if (productUpdateDTO.Photos != null)
             {
-                Id= product.Id,
-                Name=product.Name,
-                Price= product.Price,
-                Description=product.Description,
-                CategoryId=product.Category.Id
-            };
-            if (dto.Photos != null)
-            {
-                foreach (var photo in dto.Photos)
+                foreach (var photo in productUpdateDTO.Photos)
                 {
                     if (!photo.CheckImage())
                     {
@@ -139,11 +121,23 @@ namespace CozaStore.Persistence.Services
                     string fileName = photo.SaveFile("uploads","images"); 
                     product.ProductImages.Add(new ProductImage
                     {
+                        Id=product.Id,
                         ImageUrl = fileName,
                         IsMain = false 
                     });
                 }
             }
+            // Köhnə şəkillərin isMain statusunu yenilə
+            foreach (var image in product.ProductImages)
+            {
+                var updatedImage = product.ProductImages.FirstOrDefault(pi => pi.Id == image.Id);
+                if (updatedImage != null)
+                {
+                    image.IsMain = updatedImage.IsMain;
+                }
+            }
+            _repository.Update(product);
+            await _repository.SaveAsync();
         }
     }
 }

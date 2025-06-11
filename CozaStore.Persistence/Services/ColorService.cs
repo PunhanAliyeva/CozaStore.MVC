@@ -20,7 +20,7 @@ namespace CozaStore.Persistence.Services
         {
             if (string.IsNullOrWhiteSpace(colorCreateDTO.Name))
                 throw new ArgumentException("Rəng adı boş ola bilməz!");
-            if (await _repository.AnyAsync(c => c.Name.Trim().ToLower() == colorCreateDTO.Name.Trim().ToLower()))
+            if (await _repository.AnyAsync(c => c.Name.Trim().ToLower() == colorCreateDTO.Name.Trim().ToLower() && c.DeletedAt == null))
                 throw new ArgumentException("Bu adda rəng artıq mövcuddur!");
             Color color = new() { Name = colorCreateDTO.Name, CreatedAt = DateTime.UtcNow };
             await _repository.AddAsync(color);

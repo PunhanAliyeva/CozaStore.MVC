@@ -11,6 +11,6 @@ namespace CozaStore.Application.DTOs.ProductDTOs
         public double Price { get; set; }
         public int CategoryId { get; set; }
         public IFormFile[]? Photos { get; set; }
-        public List<ProductImageDTO> ProductImages { get; set; }
+        public List<ProductImageDTO> ProductImages { get; set; } = new();
     }
 }

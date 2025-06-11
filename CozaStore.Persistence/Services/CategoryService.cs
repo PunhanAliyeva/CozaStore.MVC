@@ -89,7 +89,7 @@ namespace CozaStore.Persistence.Services
 		{
 			var category = await _categoryRepository.GetByIdAsync(categoryUpdateDTO.Id);
 			if (category is null) throw new KeyNotFoundException("Kateqoriya tapılmadı!");
-			if (await _repository.AnyAsync(c => c.Name.Trim().ToLower() == categoryUpdateDTO.Name.Trim().ToLower() && c.Id != categoryUpdateDTO.Id))
+			if (await _repository.AnyAsync(c => c.Name.Trim().ToLower() == categoryUpdateDTO.Name.Trim().ToLower() && c.Id != categoryUpdateDTO.Id && c.DeletedAt==null))
 				throw new ValidationException("Name", "Bu kateqoriya artıq mövcuddur!");
 			category.Name = categoryUpdateDTO.Name;
 			category.Concept = categoryUpdateDTO.Concept;

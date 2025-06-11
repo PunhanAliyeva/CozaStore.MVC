@@ -1,4 +1,5 @@
-﻿using CozaStore.Application.DTOs.ProductDTOs;
+﻿using CozaStore.Application.DTOs;
+using CozaStore.Application.DTOs.ProductDTOs;
 using CozaStore.Application.DTOs.SliderDTOs;
 using CozaStore.Domain.Entities;
 using CozaStore.Domain.Interfaces.IServices;
@@ -73,16 +74,31 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
-            var product = await _productService.GetByIdAsync(id);
+            ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
+            var product = await _productService.GetProductByIdWithIncludesAsync(id);
             if (product == null) return NotFound();
-            ProductUpdateDTO productUpdateDTO = new() { Id = product.Id, Name = product.Name, Description = product.Description, Price = product.Price, CategoryId = product.CategoryId };
+
+            var productUpdateDTO = new ProductUpdateDTO
+            {
+                Id = product.Id,
+                Name = product.Name,
+                Description = product.Description,
+                Price = product.Price,
+                CategoryId = product.CategoryId,
+                ProductImages = product.ProductImages.Select(pi => new ProductImageDTO
+                {
+                    Id = pi.Id,
+                    ImageUrl = pi.ImageUrl,
+                    IsMain = pi.IsMain
+                }).ToList()
+            };
             return View(productUpdateDTO);
         }
-
         [HttpPost]
         [AutoValidateAntiforgeryToken]
         public async Task<IActionResult> Update(int id, ProductUpdateDTO productUpdateDTO)
         {
+            ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
             if (id != productUpdateDTO.Id) return BadRequest();
             if (!ModelState.IsValid) return View(productUpdateDTO);
             try
@@ -98,7 +114,6 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
             catch (KeyNotFoundException ex)
             {
                 return NotFound(ex.Message);
-
             }
         }
     }

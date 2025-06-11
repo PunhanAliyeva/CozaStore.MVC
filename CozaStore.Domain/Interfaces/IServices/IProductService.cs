@@ -6,7 +6,7 @@ namespace CozaStore.Domain.Interfaces.IServices
 	public interface IProductService : IService<Product>
 	{
 		Task<List<ProductGetDTO>> GetProductsWithIncludesAsync();
-        Task<ProductGetDTO> GetProductByIdWithIncludesAsync(int id);
+        Task<Product> GetProductByIdWithIncludesAsync(int id);
         Task<List<ProductGetDTO>> GetFeaturedProductsAsync(int takeCount);
 		Task CreateAsync(ProductCreateDTO productCreateDTO);
 		Task UpdateAsync(ProductUpdateDTO productUpdateDTO);

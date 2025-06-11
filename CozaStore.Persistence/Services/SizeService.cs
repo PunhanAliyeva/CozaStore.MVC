@@ -20,7 +20,7 @@ namespace CozaStore.Persistence.Services
         {
             if (string.IsNullOrWhiteSpace(sizeCreateDTO.Name))
                 throw new ArgumentException("Ölçü adı boş ola bilməz!");
-            if (await _repository.AnyAsync(s => s.Name.Trim().ToLower() == sizeCreateDTO.Name.Trim().ToLower()))
+            if (await _repository.AnyAsync(s => s.Name.ToLower() == sizeCreateDTO.Name.ToLower() && s.DeletedAt==null))
                 throw new ArgumentException("Bu adda ölçü artıq mövcuddur!");
             Size size = new() { Name = sizeCreateDTO.Name, CreatedAt = DateTime.UtcNow };
             await _repository.AddAsync(size);

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CozaStore.MVC.AdminPanel.Controllers
 {
-	[Area("AdminArea")]
+    [Area("AdminArea")]
     public class CategoryController : Controller
     {
         private readonly ICategoryService _categoryService;
@@ -56,67 +56,67 @@ namespace CozaStore.MVC.AdminPanel.Controllers
             try
             {
                 await _categoryService.DeleteAsync(id);
-                return Json(new {success=true});
+                return Json(new { success = true });
             }
             catch (KeyNotFoundException ex)
             {
-                return Json(new { success = false, message=ex.Message });
+                return Json(new { success = false, message = ex.Message });
             }
         }
 
         public async Task<IActionResult> Detail(int id)
         {
-			try
-			{
-				var categoryDTO = await _categoryService.GetCategoriesWithIncludesAsync(id);
+            try
+            {
+                var categoryDTO = await _categoryService.GetCategoriesWithIncludesAsync(id);
                 return View(categoryDTO);
-			}
-			catch (ArgumentException ex)
-			{
-				return NotFound(ex.Message);
-			}
-		}
-		public async Task<IActionResult> Update(int id)
-		{
-			ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
-			var category = await _categoryService.GetByIdAsync(id);
-			if (category == null) return NotFound();
-			CategoryUpdateDTO categoryUpdateDTO = new() 
-            { 
+            }
+            catch (ArgumentException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+        public async Task<IActionResult> Update(int id)
+        {
+            ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
+            var category = await _categoryService.GetByIdAsync(id);
+            if (category == null) return NotFound();
+            CategoryUpdateDTO categoryUpdateDTO = new()
+            {
                 Name = category.Name,
-                Concept = category.Concept, 
+                Concept = category.Concept,
                 ImageUrl = category.ImageUrl,
-                ParentId=category.ParentId
+                ParentId = category.ParentId
             };
-			return View(categoryUpdateDTO);
-		}
+            return View(categoryUpdateDTO);
+        }
 
-		[HttpPost]
-		[AutoValidateAntiforgeryToken]
-		public async Task<IActionResult> Update(int id, CategoryUpdateDTO categoryUpdateDTO)
-		{
-			ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
-			if (id != categoryUpdateDTO.Id) return BadRequest();
-			if (!ModelState.IsValid) return View(categoryUpdateDTO);
-			try
-			{
-				await _categoryService.UpdateAsync(categoryUpdateDTO);
-				return RedirectToAction(nameof(Index));
-			}
-			catch (ArgumentException ex)
-			{
-				ModelState.AddModelError("Photo", ex.Message);
-				return View(categoryUpdateDTO);
-			}
-			catch (ValidationException ex)
-			{
-				ModelState.AddModelError(ex.PropertyName, ex.Message);
-				return View(categoryUpdateDTO);
-			}
-			catch (KeyNotFoundException ex)
-			{
-				return NotFound(ex.Message);
-			}
-		}
-	}
+        [HttpPost]
+        [AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> Update(int id, CategoryUpdateDTO categoryUpdateDTO)
+        {
+            ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
+            if (id != categoryUpdateDTO.Id) return BadRequest();
+            if (!ModelState.IsValid) return View(categoryUpdateDTO);
+            try
+            {
+                await _categoryService.UpdateAsync(categoryUpdateDTO);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("Photo", ex.Message);
+                return View(categoryUpdateDTO);
+            }
+            catch (ValidationException ex)
+            {
+                ModelState.AddModelError(ex.PropertyName, ex.Message);
+                return View(categoryUpdateDTO);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+        }
+    }
 }

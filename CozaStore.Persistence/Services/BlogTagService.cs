@@ -19,7 +19,7 @@ namespace CozaStore.Persistence.Services
 		{
 			if (string.IsNullOrWhiteSpace(blogTagCreateDTO.Name))
 				throw new ArgumentException("Bloq-teq adı boş ola bilməz!");
-			if (await _repository.AnyAsync(bt => bt.Name.Trim().ToLower() == blogTagCreateDTO.Name.Trim().ToLower()))
+			if (await _repository.AnyAsync(bt => bt.Name.Trim().ToLower() == blogTagCreateDTO.Name.Trim().ToLower() && bt.DeletedAt==null))
 				throw new ValidationException("Name","Bu adda bloq-teq artıq mövcuddur!");
 			BlogTag blogTag = new() { Name = blogTagCreateDTO.Name, CreatedAt = DateTime.UtcNow };
 			await _repository.AddAsync(blogTag);

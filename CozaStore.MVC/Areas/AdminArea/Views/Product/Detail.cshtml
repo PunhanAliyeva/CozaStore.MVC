@@ -1,5 +1,5 @@
-﻿@using CozaStore.Application.DTOs.ProductDTOs
-@model ProductGetDTO
+﻿
+@model Product
 
 <div class="card">
     <div class="card-header">
@@ -31,17 +31,17 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Kateqoriya</label>
         <div class="col-sm-10">
-            <input asp-for="CategoryName" class="form-control" disabled>
+            <input asp-for="Category.Name" class="form-control" disabled>
         </div>
     </div>
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Şəkillər</label>
         <div class="col-sm-10">
-            @if (Model.ImageUrls != null)
+            @if (Model.ProductImages != null)
             {
-                @foreach (var image in Model.ImageUrls)
+                @foreach (var image in Model.ProductImages)
                 {
-                    <img src="~/uploads/images/@image" width="120" height="130" style="margin: 5px;" />
+                    <img src="~/uploads/images/@image.ImageUrl" width="120" height="130" style="margin: 5px;" />
                 }
             }
             else
@@ -59,7 +59,7 @@
     <div class="form-group row">
         <label class="col-sm-2 col-form-label">Dəyişiklik olunma tarixi</label>
         <div class="col-sm-10">
-            <input asp-for="ModifiedAt" class="form-control" disabled>
+            <input asp-for="UpdatedAt" class="form-control" disabled>
         </div>
     </div>
 </div>

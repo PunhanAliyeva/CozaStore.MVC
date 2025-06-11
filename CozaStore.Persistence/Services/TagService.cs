@@ -18,7 +18,7 @@ namespace CozaStore.Persistence.Services
         {
             if (string.IsNullOrWhiteSpace(tagCreateDTO.Name))
                 throw new ArgumentException("Teq adı boş ola bilməz!");
-            if (await _repository.AnyAsync(t => t.Name.Trim().ToLower() == tagCreateDTO.Name.Trim().ToLower()))
+            if (await _repository.AnyAsync(t => t.Name.Trim().ToLower() == tagCreateDTO.Name.Trim().ToLower() && t.DeletedAt == null))
                 throw new ArgumentException("Bu adda teq artıq mövcuddur!");
             Tag tag = new() { Name=tagCreateDTO.Name,CreatedAt=DateTime.UtcNow };
             await _repository.AddAsync(tag);

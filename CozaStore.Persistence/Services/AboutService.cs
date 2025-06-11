@@ -25,7 +25,7 @@ namespace CozaStore.Persistence.Services
 			if (aboutCreateDTO.Photo.CheckImageSize(2000))
 				throw new ArgumentException("Şəklin ölçüsü 2MB-dan çox olmamalıdır!");
             string fileName = aboutCreateDTO.Photo.SaveFile("uploads", "images");
-            if (await _repository.AnyAsync(a => a.Title.Trim().ToLower() == aboutCreateDTO.Title.Trim().ToLower()))
+            if (await _repository.AnyAsync(a => a.Title.Trim().ToLower() == aboutCreateDTO.Title.Trim().ToLower() && a.DeletedAt==null))
                 throw new ValidationException("Title", "Bu adda başlıq artıq mövcuddur!");
             About about = new() { Title=aboutCreateDTO.Title,Description=aboutCreateDTO.Description,ImageUrl=fileName,CreatedAt=DateTime.UtcNow};
 			await _repository.AddAsync(about);
