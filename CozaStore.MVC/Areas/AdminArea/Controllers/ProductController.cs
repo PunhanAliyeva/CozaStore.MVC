@@ -3,6 +3,7 @@ using CozaStore.Application.DTOs.ProductDTOs;
 using CozaStore.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 
 namespace CozaStore.MVC.Areas.AdminArea.Controllers
 {
@@ -11,10 +12,12 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
-        public ProductController(IProductService productService, ICategoryService categoryService)
+        private readonly IProductImageService _productImageService;
+        public ProductController(IProductService productService, ICategoryService categoryService, IProductImageService productImageService)
         {
             _productService = productService;
             _categoryService = categoryService;
+            _productImageService = productImageService;
         }
 
         public async Task<IActionResult> Index()
@@ -113,6 +116,13 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
             {
                 return NotFound(ex.Message);
             }
+        }
+        public async Task<IActionResult> DeleteImage(int id)
+        {
+            var image = await _productImageService.GetByIdAsync(id);
+            if (image == null) return NotFound();
+            _productImageService.Remove(image);
+            return RedirectToAction("Update", new { Id = image.ProductId });
         }
     }
 }

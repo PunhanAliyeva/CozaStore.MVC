@@ -36,6 +36,15 @@
                             @foreach (var image in Model.ProductImages)
                             {
                                 <img src="~/uploads/images/@image.ImageUrl" width="120" height="120" style="margin:5px;"/>
+                                if (image.IsMain)
+                                {
+
+                                    <a><b>Əsas şəkil</b></a>
+                                }
+                                else
+                                {
+                                    <a asp-action="DeleteImage" asp-route-id="@image.Id">Sil</a>
+                                }
                             }
 
                         </div>
