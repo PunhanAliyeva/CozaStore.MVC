@@ -1,15 +1,12 @@
 ﻿using CozaStore.Application.DTOs;
 using CozaStore.Application.DTOs.ProductDTOs;
-using CozaStore.Application.DTOs.SliderDTOs;
-using CozaStore.Domain.Entities;
 using CozaStore.Domain.Interfaces.IServices;
-using CozaStore.Persistence.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CozaStore.MVC.Areas.AdminArea.Controllers
 {
-    [Area("AdminArea")]
+	[Area("AdminArea")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
@@ -83,6 +80,7 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
+                IsFeatured=product.IsFeatured,
                 Price = product.Price,
                 CategoryId = product.CategoryId,
                 ProductImages = product.ProductImages.Select(pi => new ProductImageDTO

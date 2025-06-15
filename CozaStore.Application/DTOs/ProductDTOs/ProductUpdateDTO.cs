@@ -9,6 +9,7 @@ namespace CozaStore.Application.DTOs.ProductDTOs
         public string Name { get; set; }
         public string Description { get; set; }
         public double Price { get; set; }
+        public bool IsFeatured { get; set; }
         public int CategoryId { get; set; }
         public IFormFile[]? Photos { get; set; }
         public List<ProductImageDTO> ProductImages { get; set; } = new();

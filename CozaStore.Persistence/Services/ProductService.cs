@@ -106,6 +106,11 @@ namespace CozaStore.Persistence.Services
         {
             var product =await _repository.GetProductByIdWithIncludesAsync(productUpdateDTO.Id);
             if (product is null) throw new KeyNotFoundException("Məhsul tapılmadı!");
+            product.Name= productUpdateDTO.Name;
+            product.Description= productUpdateDTO.Description;
+            product.Price= productUpdateDTO.Price;
+            product.CategoryId= productUpdateDTO.CategoryId;
+            product.IsFeatured = productUpdateDTO.IsFeatured;
             if (productUpdateDTO.Photos != null)
             {
                 foreach (var photo in productUpdateDTO.Photos)
@@ -115,13 +120,13 @@ namespace CozaStore.Persistence.Services
                         throw new ArgumentException("Yalniz şəkil göndərilə bilər!");
                     }
                     if (photo.CheckImageSize(2000))
-                    {
+                    {   
                         throw new ArgumentException("Şəklin ölçüsü 2MB-dan çox olmamalıdır!");
                     }
                     string fileName = photo.SaveFile("uploads","images"); 
                     product.ProductImages.Add(new ProductImage
                     {
-                        Id=product.Id,
+                        ProductId=product.Id,
                         ImageUrl = fileName,
                         IsMain = false 
                     });
@@ -130,13 +135,14 @@ namespace CozaStore.Persistence.Services
             // Köhnə şəkillərin isMain statusunu yenilə
             foreach (var image in product.ProductImages)
             {
-                var updatedImage = product.ProductImages.FirstOrDefault(pi => pi.Id == image.Id);
+                var updatedImage = productUpdateDTO.ProductImages.FirstOrDefault(pi => pi.Id == image.Id);
                 if (updatedImage != null)
                 {
                     image.IsMain = updatedImage.IsMain;
                 }
             }
             _repository.Update(product);
+            product.UpdatedAt= DateTime.UtcNow;
             await _repository.SaveAsync();
         }
     }

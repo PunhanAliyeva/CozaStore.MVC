@@ -47,7 +47,7 @@ namespace CozaStore.Persistence.Services
             var about = await _repository.GetByIdAsync(aboutUpdateDTO.Id);
             if (about == null)
                 throw new KeyNotFoundException("Haqqında tapılmadı!");
-            if (await _repository.AnyAsync(a => a.Title.Trim().ToLower() == aboutUpdateDTO.Title.Trim().ToLower()))
+            if (await _repository.AnyAsync(a => a.Title.Trim().ToLower() == aboutUpdateDTO.Title.Trim().ToLower() && a.DeletedAt==null && a.Id!=aboutUpdateDTO.Id))
                 throw new ValidationException("Title", "Bu başlıq artıq mövcuddur!");
             about.Title = aboutUpdateDTO.Title;
             about.Description = aboutUpdateDTO.Description;
