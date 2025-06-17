@@ -79,7 +79,7 @@ namespace CozaStore.MVC.AdminPanel.Controllers
         public async Task<IActionResult> Update(int id)
         {
             ViewBag.Categories = new SelectList(await _categoryService.GetAllAsync(), "Id", "Name");
-            var category = await _categoryService.GetByIdAsync(id);
+            var category = await _categoryService.GetAsync(c=>c.Id==id);
             if (category == null) return NotFound();
             CategoryUpdateDTO categoryUpdateDTO = new()
             {

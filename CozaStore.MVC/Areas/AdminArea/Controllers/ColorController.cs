@@ -42,7 +42,7 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
-            var color = await _colorService.GetByIdAsync(id);
+            var color = await _colorService.GetAsync(c=>c.Id==id);
             if (color == null) return NotFound();
             ColorUpdateDTO colorUpdateDTO = new() { Name = color.Name };
             return View(colorUpdateDTO);
@@ -71,7 +71,7 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Detail(int id)
         {
-            var color = await _colorService.GetByIdAsync(id);
+            var color = await _colorService.GetAsync(c=>c.Id==id);
             if (color is null) return NotFound();
             return View(color);
         }

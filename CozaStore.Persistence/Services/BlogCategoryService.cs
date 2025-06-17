@@ -29,7 +29,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task DeleteAsync(int id)
         {
-            var blogCategory = await _repository.GetByIdAsync(id);
+            var blogCategory = await _repository.GetAsync(b => b.Id == id);
             if (blogCategory is null) throw new KeyNotFoundException("Bloq-Kateqoriya tapılmadı!");
             _repository.Delete(blogCategory);
             await _repository.SaveAsync();
@@ -37,7 +37,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task UpdateAsync(BlogCategoryUpdateDTO blogCategoryUpdateDTO)
         {
-            var blogCategory = await _repository.GetByIdAsync(blogCategoryUpdateDTO.Id);
+            var blogCategory = await _repository.GetAsync(b=>b.Id== blogCategoryUpdateDTO.Id);
             if (blogCategory is null) throw new KeyNotFoundException("Bloq-Kateqoriya tapılmadı!");
             if (await _repository.AnyAsync(bc => bc.Name.Trim().ToLower() == blogCategoryUpdateDTO.Name.Trim().ToLower() && bc.Id != blogCategoryUpdateDTO.Id))
                 throw new ValidationException("Name", "Bu bloq-kateqoriya artıq mövcuddur!");

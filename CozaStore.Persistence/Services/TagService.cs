@@ -26,7 +26,7 @@ namespace CozaStore.Persistence.Services
         }
         public async Task DeleteAsync(int id)
         {
-            var tag = await _repository.GetByIdAsync(id);
+            var tag = await _repository.GetAsync(t => t.Id ==id);
             if (tag == null) throw new KeyNotFoundException("Teq tapılmadı");
             _repository.Delete(tag);
             await _repository.SaveAsync();
@@ -34,7 +34,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task UpdateAsync(TagUpdateDTO tagUpdateDTO)
         {
-            var tag = await _repository.GetByIdAsync(tagUpdateDTO.Id);
+            var tag = await _repository.GetAsync(t=>t.Id==tagUpdateDTO.Id);
             if (tag == null) throw new KeyNotFoundException("Teq tapılmadı");
             var isExist = await _repository.AnyAsync(t => t.Name.Trim().ToLower() == tagUpdateDTO.Name.Trim().ToLower() && t.Id != tagUpdateDTO.Id);
             if (isExist) throw new ValidationException("Name","Eyniadlı teq əlavə etmək olmaz!");

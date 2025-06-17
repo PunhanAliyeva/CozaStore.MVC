@@ -1,6 +1,7 @@
 ﻿using CozaStore.Domain.Commons;
 using CozaStore.Domain.Interfaces.IRepositories;
 using CozaStore.Domain.Interfaces.IServices;
+using System.Linq.Expressions;
 
 namespace CozaStore.Persistence.Services
 {
@@ -25,14 +26,21 @@ namespace CozaStore.Persistence.Services
             await _repository.SaveAsync();
         }
 
-        public async Task<List<T>> GetAllAsync()
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null)
         {
-            return await _repository.GetAllAsync();
+            if(predicate == null) return await _repository.GetAllAsync();
+            return await _repository.GetAllAsync(predicate);
+        }
+
+        public async Task<T?> GetAsync(Expression<Func<T, bool>> predicate = null)
+        {
+            if(predicate is null) return await _repository.GetAsync();
+            return await _repository.GetAsync(predicate);
         }
 
         public async Task<T?> GetByIdAsync(int id)
         {
-            return await _repository.GetByIdAsync(id); ;
+            return await _repository.GetAsync(r=>r.Id==id); 
         }
 
         public async Task UpdateAsync(T entity)

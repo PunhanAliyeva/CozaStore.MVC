@@ -32,7 +32,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <span>Köhnə şəkillər</span>
+                            <p>Köhnə şəkillər</p>
                             @foreach (var image in Model.ProductImages)
                             {
                                 <img src="~/uploads/images/@image.ImageUrl" width="120" height="120" style="margin:5px;"/>
@@ -43,7 +43,8 @@
                                 }
                                 else
                                 {
-                                    <a asp-action="DeleteImage" asp-route-id="@image.Id">Sil</a>
+                                    <a class="btn btn-danger" asp-controller="product" asp-action="DeleteImage" asp-route-id="@image.Id">Sil</a>
+                                    <a class="btn btn-success" asp-controller="product" asp-action="SetMainPhoto" asp-route-id="@image.Id">Əsas şəkil et</a>
                                 }
                             }
 

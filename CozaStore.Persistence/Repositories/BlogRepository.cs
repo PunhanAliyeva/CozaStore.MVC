@@ -18,7 +18,7 @@ namespace CozaStore.Persistence.Repositories
 		public async Task<List<Blog>> GetBlogsWithBlogCategories()
 		{
 			return await _context.Blogs
-				.Include(b=>b.BlogCategory)
+				.Include(b => b.BlogCategory)
 				.ToListAsync();
 		}
 	}

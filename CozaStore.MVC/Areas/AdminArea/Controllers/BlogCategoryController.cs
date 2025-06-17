@@ -47,7 +47,7 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
-            var blogCategory = await _blogCategoryService.GetByIdAsync(id);
+            var blogCategory = await _blogCategoryService.GetAsync(b=>b.Id==id);
             if (blogCategory == null) return NotFound();
             BlogCategoryUpdateDTO blogCategoryUpdateDTO = new() { Name = blogCategory.Name };
             return View(blogCategoryUpdateDTO);
@@ -89,7 +89,7 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Detail(int id)
         {
-            var blogCategory = await _blogCategoryService.GetByIdAsync(id);
+            var blogCategory = await _blogCategoryService.GetAsync(b=>b.Id==id);
             if (blogCategory is null) return NotFound();
             return View(blogCategory);
         }

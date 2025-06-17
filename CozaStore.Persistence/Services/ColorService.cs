@@ -29,7 +29,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task DeleteAsync(int id)
         {
-            var color = await _repository.GetByIdAsync(id);
+            var color = await _repository.GetAsync(c => c.Id == id && c.DeletedAt==null);
             if (color == null) throw new KeyNotFoundException("Rəng tapılmadı");
             _repository.Delete(color);
             await _repository.SaveAsync();
@@ -37,7 +37,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task UpdateAsync(ColorUpdateDTO colorUpdateDTO)
         {
-            var color = await _repository.GetByIdAsync(colorUpdateDTO.Id);
+            var color = await _repository.GetAsync(c=>c.Id==colorUpdateDTO.Id && c.DeletedAt==null);
             if (color == null) throw new KeyNotFoundException("Rəng tapılmadı");
             var isExist = await _repository.AnyAsync(c => c.Name.Trim().ToLower() == colorUpdateDTO.Name.Trim().ToLower() && c.Id != colorUpdateDTO.Id);
             if (isExist) throw new ValidationException("Name", "Eyni rəng əlavə etmək olmaz!");

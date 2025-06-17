@@ -1,23 +1,27 @@
 ﻿using CozaStore.Application.DTOs;
 using CozaStore.Application.DTOs.ProductDTOs;
+using CozaStore.Domain.Interfaces.IRepositories;
 using CozaStore.Domain.Interfaces.IServices;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Reflection;
 
 namespace CozaStore.MVC.Areas.AdminArea.Controllers
 {
-	[Area("AdminArea")]
+    [Area("AdminArea")]
     public class ProductController : Controller
     {
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IProductImageService _productImageService;
-        public ProductController(IProductService productService, ICategoryService categoryService, IProductImageService productImageService)
+        private readonly IProductImageRepository _productImageRepository;
+        public ProductController(IProductService productService, ICategoryService categoryService, IProductImageService productImageService, IProductImageRepository productImageRepository)
         {
             _productService = productService;
             _categoryService = categoryService;
             _productImageService = productImageService;
+            _productImageRepository = productImageRepository;
         }
 
         public async Task<IActionResult> Index()
@@ -83,7 +87,7 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
                 Id = product.Id,
                 Name = product.Name,
                 Description = product.Description,
-                IsFeatured=product.IsFeatured,
+                IsFeatured = product.IsFeatured,
                 Price = product.Price,
                 CategoryId = product.CategoryId,
                 ProductImages = product.ProductImages.Select(pi => new ProductImageDTO
@@ -119,10 +123,23 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> DeleteImage(int id)
         {
-            var image = await _productImageService.GetByIdAsync(id);
+            var image = await _productImageService.GetAsync(i => i.Id == id);
             if (image == null) return NotFound();
-            _productImageService.Remove(image);
-            return RedirectToAction("Update", new { Id = image.ProductId });
+            await _productImageService.HardDeleteImageAsync(image);
+            return RedirectToAction("Update", new { id = image.ProductId });
+        }
+        public async Task<IActionResult> SetMainPhoto(int id)
+        {
+            var image = await _productImageService.GetAsync(i => i.Id == id);
+            if (image == null) return NotFound();
+            image.IsMain = true;
+            var existedImage = await _productImageService.GetAsync(i => i.IsMain && i.ProductId == image.ProductId);
+            if (existedImage != null)
+            {
+                existedImage.IsMain = false;
+            }
+            await _productImageRepository.SaveAsync();
+            return RedirectToAction("Update", new { id = image.ProductId });
         }
     }
 }

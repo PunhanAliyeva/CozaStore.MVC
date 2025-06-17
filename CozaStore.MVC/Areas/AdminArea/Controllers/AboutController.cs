@@ -45,13 +45,13 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Detail(int id)
         {
-            var about = await _aboutService.GetByIdAsync(id);
+            var about = await _aboutService.GetAsync(a=>a.Id==id);
             if (about == null) return NotFound();
             return View(about);
         }
         public async Task<IActionResult> Update(int id)
         {
-            var about = await _aboutService.GetByIdAsync(id);
+            var about = await _aboutService.GetAsync(a => a.Id == id);
             if (about == null) return NotFound();
             AboutUpdateDTO aboutUpdateDTO = new() { Title = about.Title, Description = about.Description, ImageUrl = about.ImageUrl };
             return View(aboutUpdateDTO);

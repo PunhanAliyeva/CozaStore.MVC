@@ -34,7 +34,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task DeleteAsync(int id)
         {
-            var about=await _repository.GetByIdAsync(id);
+            var about=await _repository.GetAsync(a=>a.Id==id);
             if (about == null)
                 throw new KeyNotFoundException("Haqqında tapılmadı!");
             _repository.Delete(about);
@@ -44,7 +44,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task UpdateAsync(AboutUpdateDTO aboutUpdateDTO)
         {
-            var about = await _repository.GetByIdAsync(aboutUpdateDTO.Id);
+            var about = await _repository.GetAsync(a=>a.Id==aboutUpdateDTO.Id);
             if (about == null)
                 throw new KeyNotFoundException("Haqqında tapılmadı!");
             if (await _repository.AnyAsync(a => a.Title.Trim().ToLower() == aboutUpdateDTO.Title.Trim().ToLower() && a.DeletedAt==null && a.Id!=aboutUpdateDTO.Id))

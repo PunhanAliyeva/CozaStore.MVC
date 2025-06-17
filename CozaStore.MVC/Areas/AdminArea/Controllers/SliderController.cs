@@ -63,7 +63,7 @@ namespace CozaStore.MVC.AdminPanel.Controllers
 
         public async Task<IActionResult> Update(int id)
         {
-            var slider = await _sliderService.GetByIdAsync(id);
+            var slider = await _sliderService.GetAsync(s=>s.Id==id);
             if (slider == null) return NotFound();
             SliderUpdateDTO sliderUpdateDTO = new() { Title = slider.Title, SubTitle = slider.SubTitle, ImageUrl = slider.ImageUrl };
             return View(sliderUpdateDTO);
@@ -94,7 +94,7 @@ namespace CozaStore.MVC.AdminPanel.Controllers
 
         public async Task<IActionResult> Detail(int id)
         {
-            var slider = await _sliderService.GetByIdAsync(id);
+            var slider = await _sliderService.GetAsync(s=>s.Id==id);
             if (slider == null) return NotFound();
             return View(slider);
         }

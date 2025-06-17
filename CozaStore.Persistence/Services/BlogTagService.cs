@@ -27,14 +27,14 @@ namespace CozaStore.Persistence.Services
 		}
         public async Task DeleteAsync(int id)
         {
-            var blogTag = await _repository.GetByIdAsync(id);
+            var blogTag = await _repository.GetAsync(b => b.Id == id);
             if (blogTag == null) throw new KeyNotFoundException("Bloq-Teq tapılmadı");
             _repository.Delete(blogTag);
             await _repository.SaveAsync();
         }
         public async Task UpdateAsync(BlogTagUpdateDTO blogTagUpdateDTO)
         {
-            var blogTag = await _repository.GetByIdAsync(blogTagUpdateDTO.Id);
+            var blogTag = await _repository.GetAsync(b=>b.Id==blogTagUpdateDTO.Id);
             if (blogTag == null) throw new KeyNotFoundException("Bloq-Teq tapılmadı");
             var isExist = await _repository.AnyAsync(bt => bt.Name.Trim().ToLower() == blogTagUpdateDTO.Name.Trim().ToLower() && bt.Id != blogTagUpdateDTO.Id);
             if (isExist) throw new ValidationException("Name", "Eyniadlı bloq-teq əlavə etmək olmaz!");

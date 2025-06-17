@@ -42,13 +42,13 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Detail(int id)
         {
-            var size = await _sizeService.GetByIdAsync(id);
+            var size = await _sizeService.GetAsync(s=>s.Id==id);
             if (size is null) return NotFound();
             return View(size);
         }
         public async Task<IActionResult> Update(int id)
         {
-            var size = await _sizeService.GetByIdAsync(id);
+            var size = await _sizeService.GetAsync(s=>s.Id==id);
             if (size == null) return NotFound();
             SizeUpdateDTO sizeUpdateDTO = new() { Name = size.Name };
             return View(sizeUpdateDTO);

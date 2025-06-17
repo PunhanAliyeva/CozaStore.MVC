@@ -1,5 +1,4 @@
 ﻿using CozaStore.Domain.Commons;
-using CozaStore.Domain.Entities;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CozaStore.Domain.Entities

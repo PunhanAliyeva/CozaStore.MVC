@@ -29,7 +29,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task DeleteAsync(int id)
         {
-            var size=await _repository.GetByIdAsync(id);
+            var size=await _repository.GetAsync(s=>s.Id==id);
             if(size == null) throw new KeyNotFoundException("Ölçü tapılmadı");
            _repository.Delete(size);
             await _repository.SaveAsync();
@@ -37,7 +37,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task UpdateAsync(SizeUpdateDTO sizeUpdateDTO)
         {
-            var size = await _repository.GetByIdAsync(sizeUpdateDTO.Id);
+            var size = await _repository.GetAsync(s=>s.Id==sizeUpdateDTO.Id);
             if (size == null) throw new KeyNotFoundException("Ölçü tapılmadı");
             var isExist = await _repository.AnyAsync(s => s.Name.Trim().ToLower() == sizeUpdateDTO.Name.Trim().ToLower() && s.Id != sizeUpdateDTO.Id);
             if (isExist) throw new ValidationException("Name", "Eyniadlı ölçü əlavə etmək olmaz!");

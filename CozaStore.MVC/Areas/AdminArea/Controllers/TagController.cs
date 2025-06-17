@@ -42,7 +42,7 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Detail(int id)
         {
-            var tag = await _tagService.GetByIdAsync(id);
+            var tag = await _tagService.GetAsync(t=>t.Id==id);
             if (tag is null) return NotFound();
             return View(tag);
         }
@@ -60,7 +60,7 @@ namespace CozaStore.MVC.Areas.AdminArea.Controllers
         }
         public async Task<IActionResult> Update(int id)
         {
-            var tag = await _tagService.GetByIdAsync(id);
+            var tag = await _tagService.GetAsync(t=>t.Id==id);
             if (tag == null) return NotFound();
             TagUpdateDTO tagUpdateDTO = new() { Name=tag.Name};
             return View(tagUpdateDTO);

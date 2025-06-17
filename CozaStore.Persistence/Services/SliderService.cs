@@ -41,7 +41,7 @@ namespace CozaStore.Persistence.Services
 
         public async Task UpdateAsync(SliderUpdateDTO sliderUpdateDTO)
         {
-            var slider = await _repository.GetByIdAsync(sliderUpdateDTO.Id);
+            var slider = await _repository.GetAsync(s=>s.Id==sliderUpdateDTO.Id);
             if (slider == null) throw new KeyNotFoundException("Slayd tapılmadı");
 
             slider.Title = sliderUpdateDTO.Title;
@@ -66,7 +66,7 @@ namespace CozaStore.Persistence.Services
         }
         public async Task DeleteAsync(int id)
         {
-            var slider = await _repository.GetByIdAsync(id);
+            var slider = await _repository.GetAsync(s=>s.Id==id);
             if (slider == null) throw new KeyNotFoundException("Slayd tapılmadı");
             _repository.Delete(slider);
             FileHelper.DeleteFile("uploads", "images", slider.ImageUrl);

@@ -47,7 +47,7 @@ namespace CozaStore.Persistence.Services
 		}
 		public async Task DeleteAsync(int id)
 		{
-			var category = await _repository.GetByIdAsync(id);
+			var category = await _repository.GetAsync(c=>c.Id==id);
 			if (category is null) throw new KeyNotFoundException("Kateqoriya tapılmadı!");
 			_repository.Delete(category);
 			FileHelper.DeleteFile("uploads", "images", category.ImageUrl);
@@ -87,7 +87,7 @@ namespace CozaStore.Persistence.Services
 
 		public async Task UpdateAsync(CategoryUpdateDTO categoryUpdateDTO)
 		{
-			var category = await _categoryRepository.GetByIdAsync(categoryUpdateDTO.Id);
+			var category = await _categoryRepository.GetAsync(c=>c.Id==categoryUpdateDTO.Id);
 			if (category is null) throw new KeyNotFoundException("Kateqoriya tapılmadı!");
 			if (await _repository.AnyAsync(c => c.Name.Trim().ToLower() == categoryUpdateDTO.Name.Trim().ToLower() && c.Id != categoryUpdateDTO.Id && c.DeletedAt==null))
 				throw new ValidationException("Name", "Bu kateqoriya artıq mövcuddur!");

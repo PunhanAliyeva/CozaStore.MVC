@@ -39,6 +39,8 @@ namespace CozaStore.Persistence
 			services.AddScoped<IColorService, ColorService>();
             services.AddScoped<ISizeRepository, SizeRepository>();
             services.AddScoped<ISizeService, SizeService>();
+            services.AddScoped<IProductImageRepository, ProductImageRepository>();
+            services.AddScoped<IProductImageService, ProductImageService>();
 		}
     }
 }

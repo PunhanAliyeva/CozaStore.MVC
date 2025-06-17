@@ -26,16 +26,6 @@ namespace CozaStore.Persistence.Repositories
             entity.DeletedAt = DateTime.UtcNow;
             _table.Update(entity);
         }
-
-        public async Task<List<T>> GetAllAsync()
-        {
-            return await _table.Where(t => t.DeletedAt == null).ToListAsync();
-        }
-
-        public async Task<T?> GetByIdAsync(int id)
-        {
-            return await _table.FirstOrDefaultAsync(t=> t.Id == id && t.DeletedAt==null);
-        }
         public void Update(T entity)
         {
             _table.Update(entity);
@@ -49,6 +39,29 @@ namespace CozaStore.Persistence.Repositories
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
         {
             return await _table.AnyAsync(predicate);
+        }
+
+        public async Task HardDeleteAsync(T entity)
+        {
+           _table.Remove(entity);
+        }
+
+        public async Task<List<T>> GetAllAsync(Expression<Func<T, bool>> predicate = null)
+        {
+            if (predicate == null)
+            {
+                return await _table.Where(t => t.DeletedAt == null).ToListAsync();
+            }
+            return await _table.Where(predicate).ToListAsync();
+        }
+
+        public async Task<T?> GetAsync(Expression<Func<T, bool>> predicate = null)
+        {
+            if (predicate == null)
+            {
+                return await _table.Where(t => t.DeletedAt == null).FirstOrDefaultAsync();
+            }
+            return await _table.Where(predicate).FirstOrDefaultAsync(p=>p.DeletedAt==null);
         }
     }
 }
