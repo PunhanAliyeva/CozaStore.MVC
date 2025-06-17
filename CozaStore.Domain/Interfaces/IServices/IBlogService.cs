@@ -7,6 +7,6 @@ namespace CozaStore.Domain.Interfaces.IServices
 	public interface IBlogService:IService<Blog>
 	{
 		Task<List<Blog>> GetBlogsWithBlogCategories();
-		//Task CreateAsync(BlogCreateDTO blogCreateDTO);
+		Task CreateAsync(BlogCreateDTO blogCreateDTO);
 	}
 }
